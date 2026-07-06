@@ -9,7 +9,7 @@ from langchain_pipeline.config import BATCH_SIZE, MODEL_NAME, SYSTEM_PROMPT_PATH
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
 DATA_DIR  = Path(__file__).parent.parent / "data"
-RESULT_DIR = Path(__file__).parent.parent / "results"
+RESULT_DIR = Path(__file__).parent.parent / "results" / {MODEL_NAME}
 
 def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100):
     triple_list = list(zip(df['subject'], df['predicate'], df['object']))
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     results = run_experiment(
         df=df_sample,
-        experiment_name="exp04_batched",
+        experiment_name="exp05_LG",
         experiment_desc="Langchain Pipeline, More detailed label description, batched 10, ConceptNet Predicate Description, Binary classification : VALID/NOISY",
         sample_size=100,
     )

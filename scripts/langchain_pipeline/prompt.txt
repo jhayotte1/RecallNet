@@ -73,7 +73,7 @@ Reasoning: Both subject and object are too vague to be meaningful.
 Label: NOISY
 
 ## TASK
-Classify each triplet in the batch. Respond ONLY with a JSON object where each key is the triplet index and each value is an object with "reasoning" (one sentence max) and "label" (VALID, NOISY).
+Classify each triplet in the batch. Respond ONLY with a JSON object with a "classifications" key mapping each triplet index to an object with "reasoning" (one sentence max) and "label" (VALID, NOISY).
 
 OUTPUT SCHEMA:
-{"0": {"reasoning": "Dogs do bark, correct use of CapableOf.", "label": "VALID"}, "1": {"reasoning": "Bananas have no connection to driving.", "label": "NOISY"}}
+{"classifications": {"0": {"reasoning": "Dogs do bark, correct use of CapableOf.", "label": "VALID"}, "1": {"reasoning": "Bananas have no connection to driving.", "label": "NOISY"}}}

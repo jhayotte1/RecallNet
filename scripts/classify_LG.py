@@ -14,7 +14,7 @@ RESULT_DIR = Path(__file__).parent.parent / "results"
 def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100):
     triple_list = list(zip(df['subject'], df['predicate'], df['object']))
 
-    batches = make_batches(triple_list)
+    batches = make_batches(triple_list, size=BATCH_SIZE)
 
     start = time.time()
     results = classify_batches(batches)
@@ -24,10 +24,10 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     rows = []
     errors = 0
     for batch, result in zip(batches, results):
-        if results is None:
+        if result is None:
             errors += len(batch)
             continue
-        for idx_str, classification in results.classifications.items():
+        for idx_str, classification in result.classifications.items():
             idx = int(idx_str)
             s, p, o = batch[idx]
             rows.append({
@@ -70,10 +70,8 @@ if __name__ == "__main__":
 
     results = run_experiment(
         df=df_sample,
-        model="llama3.1:8b",
         experiment_name="exp04_batched",
         experiment_desc="Langchain Pipeline, More detailed label description, batched 10, ConceptNet Predicate Description, Binary classification : VALID/NOISY",
-        score=False,
         sample_size=100,
     )
 

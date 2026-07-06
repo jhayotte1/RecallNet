@@ -1,8 +1,9 @@
 from pathlib import Path
 from langchain.chat_models import init_chat_model
-from output import BatchClassification
-from config import MODEL_NAME, MODEL_PROVIDER, TEMPERATURE, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY
-from batching import format_batch
+
+from .output import BatchClassification
+from .config import MODEL_NAME, MODEL_PROVIDER, TEMPERATURE, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY
+from .batching import format_batch
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
 

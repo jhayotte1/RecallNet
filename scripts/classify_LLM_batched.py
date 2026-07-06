@@ -10,51 +10,82 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 RESULTS_DIR = Path(__file__).parent.parent / "results"
 BATCH_SIZE = 10
 
-SYSTEM_PROMPT = """You are a commonsense knowledge evaluator. Your task is to classify triplets from a commonsense knowledge graph as VALID, NOISY, or TOCHANGE.
+SYSTEM_PROMPT = """You are a commonsense knowledge evaluator. Your task is to classify triplets from a commonsense knowledge graph as VALID, or NOISY.
 
 ## Label definitions
 
-- **VALID**: The triplet is a factually correct commonsense statement. The subject, predicate, and object are all meaningful, and the predicate accurately describes the relationship between subject and object.
-- **NOISY**: The triplet is false, contradictory, malformed, nonsensical, or too vague to be informative. Also includes tautologies (subject and object are identical or synonymous) and cases where a term is unrecognizable.
-- **TOCHANGE**: The subject and object share a genuine, plausible relationship, but the predicate is incorrect. The triplet contains real signal but the relation needs to be fixed.
+- **NOISY**: 
+The triple is false, contradictory, malformed, nonsensical, or too vague to be informative.
+The triple is a tautologies : subject and object are identical or synonymous. OR the object simply repeats a keyword already present in the subject without adding new information.
+A term of a triple is unrecognizable
+The subject/predicate/object are individually recognizable but the specific relation between them is not actually true in real world.
+
+- **VALID**:
+The relation is factually true, specific, non-trivial, AND you are highly confident based on real-world knowledge.
+The subject, predicate, and object are all meaningful, and the predicate accurately describes a relationship between subject and object.
+If there is ANY doubt, ambiguity, or if the relation is too vague/generic to verify precisely, label it NOISY instead. When uncertain between VALID and NOISY, always choose NOISY.
 
 ## Relation definitions
 
 Here are the predicates used in the knowledge graph and what they mean:
+Structure : (A, **predicate**, B)
 
 - **AtLocation**: A is a typical location where B can be found. (butter, AtLocation, refrigerator)
 - **CapableOf**: Something that A can typically do is B. (knife, CapableOf, cut)
-- **Causes**: A typically causes B to happen. (exercise, Causes, sweat)
+- **Causes**: A and B are events or actions, A typically causes B to happen. (exercise, Causes, sweat)
 - **CausesDesire**: A makes someone want B. (having no food, CausesDesire, go to a store)
 - **CreatedBy**: B is a process or agent that creates A. (cake, CreatedBy, bake)
-- **DefinedAs**: A and B overlap in meaning, B is more explanatory. (peace, DefinedAs, absence of war)
-- **Desires**: A is a conscious entity that typically wants B. (person, Desires, love)
-- **DistinctFrom**: A and B are distinct members of a set; A is not B. (red, DistinctFrom, blue)
-- **Entails**: If A is true, B must also be true. (breathe, Entails, be alive) [deprecated — reinterpret as HasPrerequisite or Causes if possible]
-- **HasA**: B belongs to A, as an inherent part or possession. (bird, HasA, wing)
+- **DefinedAs**: A and B overlap in meaning, B is a more explanatory version of A. (peace, DefinedAs, absence of war)
+- **Desires**: A is a conscious entity that typically wants B. Many assertions of this type uses the appropriate language's word for "person" as A. (person, Desires, love)
+- **DistinctFrom**: A and B are distinct members of a set; something that is A is not B. Symmetric (red, DistinctFrom, blue)
+- **HasA**: B belongs to A, either as an inherent part or due to possession. (bird, HasA, wing)
+- **HasSubevent**: A and B are events, B happens as part of A. (eating, HasSubevent, chewing)
 - **HasFirstSubevent**: A is an event that begins with subevent B. (sleep, HasFirstSubevent, close eyes)
 - **HasLastSubevent**: A is an event that concludes with subevent B. (cook, HasLastSubevent, clean up)
-- **HasPrerequisite**: In order for A to happen, B needs to happen. (dream, HasPrerequisite, sleep)
-- **HasProperty**: A has B as a property; A can be described as B. (ice, HasProperty, cold)
-- **HasSubevent**: A and B are events, B happens as part of A. (eating, HasSubevent, chewing)
-- **InstanceOf**: A is a specific instance of B. (Albert Einstein, InstanceOf, physicist) [deprecated — reinterpret as IsA]
+- **HasPrerequisite**: In order for A to happen, B needs to happen, B is a dependancy of A. (dream, HasPrerequisite, sleep)
+- **HasProperty**: A has B as one of its property; A can be described as B. (ice, HasProperty, cold)
 - **MadeOf**: A is made of B. (bottle, MadeOf, plastic)
-- **MannerOf**: A is a specific way to do B. (sprint, MannerOf, run)
-- **MotivatedByGoal**: The action A is done to achieve B. (study, MotivatedByGoal, pass exam)
-- **PartOf**: A is a component of B. (wheel, PartOf, car)
-- **ReceivesAction**: A undergoes the action B. (food, ReceivesAction, eat)
-- **UsedFor**: A is used for the purpose B. (knife, UsedFor, cutting)
+- **MannerOf**: A is a specific way to do B. Similar to **IsA** but for verbs (sprint, MannerOf, run)
+- **MotivatedByGoal**: Someone does A because they want result B. A is a step toward accomplishing the goal B. (study, MotivatedByGoal, pass exam)
+- **PartOf**: A is a part of B. (wheel, PartOf, car)
+- **ReceivesAction**: B can be done to A. (food, ReceivesAction, eat)
+- **UsedFor**: A is used for B, the purpose of A is B. (knife, UsedFor, cutting)
 
-When a triplet uses the wrong predicate for a relationship that otherwise makes sense, classify as TOCHANGE.
+- **InstanceOf**: DEPRECATED : reinterpret as **IsA** if possible. If not possible, label as **NOISY**
+- **Entails**: DEPRECATED : reinterpret as **HasPrerequisite** or **Causes** if possible. If not possible, label as **NOISY**
 
-## Reasoning guidelines
+
+## REASONING GUIDELINES
 
 Think step by step before giving your label:
-1. Are the subject and object real, meaningful concepts?
-2. Does the predicate correctly describe their relationship?
-3. If the predicate is wrong, do the subject and object still share a plausible connection?
+1. Are the subject and object meaningful concept/entity/persona?
+2. Consider strictly the predicate list and definition given
+3. Does the predicate correctly describe a relationship between the subject and object ?
 
-Classify each triplet in the batch. Respond ONLY with a JSON object where each key is the triplet index and each value is an object with "reasoning" (one sentence max) and "label" (VALID, NOISY, or TOCHANGE).
+## EXAMPLES
+
+(dog, CapableOf, barking)
+Reasoning: Dogs do bark, correct use of CapableOf.
+Label: VALID
+
+(car, HasPrerequisite, fuel)
+Reasoning: A car requires fuel to operate, correct use of HasPrerequisite.
+Label: VALID
+
+(banana, UsedFor, driving a car)
+Reasoning: Bananas have no connection to driving.
+Label: NOISY
+
+(dog, IsA, dog)
+Reasoning: Tautology, conveys no information.
+Label: NOISY
+
+(thing, HasProperty, quality)
+Reasoning: Both subject and object are too vague to be meaningful.
+Label: NOISY
+
+## TASK
+Classify each triplet in the batch. Respond ONLY with a JSON object where each key is the triplet index and each value is an object with "reasoning" (one sentence max) and "label" (VALID, NOISY).
 
 Example response format:
 {"0": {"reasoning": "Dogs do bark, correct use of CapableOf.", "label": "VALID"}, "1": {"reasoning": "Bananas have no connection to driving.", "label": "NOISY"}}
@@ -65,6 +96,9 @@ You are also given each triplet's confidence score (FinalScore), which aggregate
 Higher scores indicate stronger support from the original data.
 This score is supplementary context only — always judge the triplet's semantic validity first based on the content alone.
 """
+
+## Out of prompt
+# - **TOCHANGE**: The subject and object share a genuine, plausible relationship, but the predicate is incorrect. The triplet contains real signal but the relation needs to be fixed with one in the list.
 
 
 def build_batch_prompt(batch_rows, score=False):
@@ -170,14 +204,14 @@ def run_experiment(df, model, experiment_name, experiment_desc, score=False, sam
 
 
 if __name__ == "__main__":
-    df_sample = pd.read_csv(DATA_DIR / "quasimodo_test_sample.csv")
+    df_sample = pd.read_csv(DATA_DIR / "quasi_test_100_sample.csv")
 
     results = run_experiment(
         df=df_sample,
         model="llama3.1:8b",
-        experiment_name="exp01_batched",
-        experiment_desc="Strict VALID prompt, batched (15), ConceptNet Predicate Description",
+        experiment_name="exp04_batched",
+        experiment_desc="More detailed label description, batched 10, ConceptNet Predicate Description, Binary classification : VALID/NOISY",
         score=False,
         sample_size=100,
-        batch_size=15
+        batch_size=10
     )

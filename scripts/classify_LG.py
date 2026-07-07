@@ -11,6 +11,8 @@ SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
 DATA_DIR  = Path(__file__).parent.parent / "data"
 RESULT_DIR = Path(__file__).parent.parent / "results" / {MODEL_NAME}
 
+###
+
 def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100):
     triple_list = list(zip(df['subject'], df['predicate'], df['object']))
 

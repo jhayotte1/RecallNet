@@ -1,0 +1,102 @@
+{
+    "at location": {
+      "definition": "B is a typical location where A can be found.",
+      "example": "(butter, AtLocation, refrigerator)",
+      "scoring_examples": []
+    },
+    "capable of": {
+      "definition": "Something that A can typically do is B.",
+      "example": "(knife, CapableOf, cut)",
+      "scoring_examples": []
+    },
+    "causes": {
+      "definition": "A and B are events or actions, A typically causes B to happen.",
+      "example": "(exercise, Causes, sweat)",
+      "scoring_examples": []
+    },
+    "cause desire": {
+      "definition": "A makes someone want B.",
+      "example": "(having no food, CausesDesire, go to a store)",
+      "scoring_examples": []
+    },
+    "created by": {
+      "definition": "B is a process or agent that creates A.",
+      "example": "(cake, CreatedBy, bake)",
+      "scoring_examples": []
+    },
+    "defined as": {
+      "definition": "A and B overlap in meaning, B is a more explanatory version of A.",
+      "example": "(peace, DefinedAs, absence of war)",
+      "scoring_examples": []
+    },
+    "desires": {
+      "definition": "A is a conscious entity that typically wants B. Many assertions of this type use the word 'person' as A.",
+      "example": "(person, Desires, love)",
+      "scoring_examples": []
+    },
+    "distinct from": {
+      "definition": "A and B are distinct members of a set; something that is A is not B. Symmetric.",
+      "example": "(red, DistinctFrom, blue)",
+      "scoring_examples": []
+    },
+    "has a": {
+      "definition": "B belongs to A, either as an inherent part or due to possession.",
+      "example": "(bird, HasA, wing)",
+      "scoring_examples": []
+    },
+    "has subevent": {
+      "definition": "A and B are events, B happens as part of A.",
+      "example": "(eating, HasSubevent, chewing)",
+      "scoring_examples": []
+    },
+    "has first subevent": {
+      "definition": "A is an event that begins with subevent B.",
+      "example": "(sleep, HasFirstSubevent, close eyes)",
+      "scoring_examples": []
+    },
+    "has last subevent": {
+      "definition": "A is an event that concludes with subevent B.",
+      "example": "(cook, HasLastSubevent, clean up)",
+      "scoring_examples": []
+    },
+    "has prerequisite": {
+      "definition": "In order for A to happen, B needs to happen; B is a dependency of A.",
+      "example": "(dream, HasPrerequisite, sleep)",
+      "scoring_examples": []
+    },
+    "has property": {
+      "definition": "A has B as one of its properties; A can be described as B.",
+      "example": "(ice, HasProperty, cold)",
+      "scoring_examples": []
+    },
+    "made of": {
+      "definition": "A is made of B.",
+      "example": "(bottle, MadeOf, plastic)",
+      "scoring_examples": []
+    },
+    "manner of": {
+      "definition": "A is a specific way to do B. Similar to IsA but for verbs.",
+      "example": "(sprint, MannerOf, run)",
+      "scoring_examples": []
+    },
+    "motivated by goal": {
+      "definition": "Someone does A because they want result B. A is a step toward accomplishing the goal B.",
+      "example": "(study, MotivatedByGoal, pass exam)",
+      "scoring_examples": []
+    },
+    "part of": {
+      "definition": "A is a part of B.",
+      "example": "(wheel, PartOf, car)",
+      "scoring_examples": []
+    },
+    "receives action": {
+      "definition": "B can be done to A.",
+      "example": "(food, ReceivesAction, eat)",
+      "scoring_examples": []
+    },
+    "used for": {
+      "definition": "A is used for B; the purpose of A is B.",
+      "example": "(knife, UsedFor, cutting)",
+      "scoring_examples": []
+    }
+  }

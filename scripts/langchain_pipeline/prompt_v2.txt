@@ -59,4 +59,4 @@ Respond ONLY with a JSON object.
 
 ## Output schema
 
-{"evaluations": {"0": {"reasoning": "Brief justification for the scores.", "meaningfulness": 5, "typicality": 4, "saliency": 3}, "1": {"reasoning": "...", "meaningfulness": 0, "typicality": 0, "saliency": 0}}}
+{{"evaluations": {{"0": {{"reasoning": "Brief justification for the scores.", "meaningfulness": 5, "typicality": 4, "saliency": 3}}, "1": {{"reasoning": "...", "meaningfulness": 0, "typicality": 0, "saliency": 0}}}}}}

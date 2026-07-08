@@ -2,10 +2,12 @@ from pydantic import BaseModel, Field
 from typing import Literal
 
 
-class TripleClassificaiton(BaseModel):
+class TripleEvaluation(BaseModel):
     """A triple, its label and reasoning for this label"""
     reasoning: str = Field(description="Only one sentence max")
-    label: Literal["VALID", "NOISY"]
+    meaningfulness: int = Field(ge=0, le=5)
+    typicality : int = Field(ge=0, le=5)
+    saliency: int = Field(ge=0, le=5)
 
-class BatchClassification(BaseModel):
-    classifications: dict[str, TripleClassificaiton]
+class BatchEvaluation(BaseModel):
+    evaluations: dict[str, TripleEvaluation]

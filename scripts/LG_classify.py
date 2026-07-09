@@ -21,11 +21,9 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     print("Making batches")
     batches = make_batches(triple_list, size=BATCH_SIZE)
 
-    start = time.time()
-    print("Start inference")
-    results = classify_batches(batches, predicate=pred)
+    results, start_time = classify_batches(batches, predicate=pred)
+    total_time = time.time() - start_time
     print("Inference finished")
-    total_time = time.time() - start
     avg_time = total_time / len(df)
 
     rows = []
@@ -85,7 +83,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     return out_df
 
 if __name__ == "__main__":
-    pred = "at location"
+    pred = "capable of"
     pred_parsed = pred.strip().replace(" ", "")
 
     print(f"Loading quasi_sample_{pred_parsed}.csv")
@@ -94,8 +92,8 @@ if __name__ == "__main__":
     results = run_experiment(
         df=df_sample,
         experiment_name="exp01_LG",
-        experiment_desc="Langchain Pipeline, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation",
-        pred="at location",
+        experiment_desc="Langchain Pipeline, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, 4 bits model loading",
+        pred=pred,
         sample_size=100,
     )
 

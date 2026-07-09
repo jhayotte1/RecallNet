@@ -1,8 +1,8 @@
 import json
+import time
 from pathlib import Path
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
-import transformers
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GenerationConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GenerationConfig, BitsAndBytesConfig
 
 from .output import BatchEvaluation
 from .config import MODEL_NAME, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY, PREDICATE_REG_PATH
@@ -59,7 +59,11 @@ def build_message(batch_str: str, sys_prompt: str):
     ]
 
 def classify_batches(batches, predicate: str):
+    print("Building classifier")
     classifier = build_classifier()
+    print("Building prompt")
     sys_prompt = build_prompt(predicate)
     all_messages = [build_message(format_batch(b), sys_prompt) for b in batches]
-    return classifier.batch(all_messages, config={'max_concurrency': MAX_CONCURRENCY})
+    start_time = time.time()
+    print("Start inference")
+    return classifier.batch(all_messages, config={'max_concurrency': MAX_CONCURRENCY}), start_time

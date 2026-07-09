@@ -58,5 +58,5 @@ For each triple, provide a brief reasoning (One sentences max) and an integer sc
 Respond ONLY with a JSON object.
 
 ## Output schema
-
+You have to STRICLY follow this output schema
 {{"evaluations": {{"0": {{"reasoning": "Brief justification for the scores.", "meaningfulness": 5, "typicality": 4, "saliency": 3}}, "1": {{"reasoning": "...", "meaningfulness": 0, "typicality": 0, "saliency": 0}}}}}}

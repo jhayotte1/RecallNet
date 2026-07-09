@@ -8,8 +8,8 @@ from langchain_pipeline.classify import build_prompt
 from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-DATA_DIR  = Path(__file__).parent.parent / "data"
-RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT
+DATA_DIR  = Path(__file__).parent.parent / "data" / "sample_data"
+RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "scoring_exp" 
 
 #####
 
@@ -18,10 +18,13 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     
     triple_list = list(zip(df['subject'], df['predicate'], df['object']))
 
+    print("Making batches")
     batches = make_batches(triple_list, size=BATCH_SIZE)
 
     start = time.time()
+    print("Start inference")
     results = classify_batches(batches, predicate=pred)
+    print("Inference finished")
     total_time = time.time() - start
     avg_time = total_time / len(df)
 
@@ -82,9 +85,10 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     return out_df
 
 if __name__ == "__main__":
-    pred = "at_location"
+    pred = "at location"
     pred_parsed = pred.strip().replace(" ", "")
 
+    print(f"Loading quasi_sample_{pred_parsed}.csv")
     df_sample = pd.read_csv(DATA_DIR / f"quasi_sample_{pred_parsed}.csv")
 
     results = run_experiment(

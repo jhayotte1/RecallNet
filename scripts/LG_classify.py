@@ -34,17 +34,17 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
         if result is None:
             errors += len(batch)
             continue
-        for idx_str, evaluation in result.evaluations.items():
+        for idx_str, evaluation in result["evaluations"].items():
             idx = int(idx_str)
             s, p, o = batch[idx]
             rows.append({
                 "subject": s,
                 "predicate": p,
                 "object": o,
-                "meaningfulness": evaluation.meaningfulness,
-                "typicality": evaluation.typicality,
-                "saliency": evaluation.saliency,
-                "reason": evaluation.reasoning,
+                "meaningfulness": evaluation["meaningfulness"],
+                "typicality": evaluation["typicality"],
+                "saliency": evaluation["saliency"],
+                "reason": evaluation["reasoning"],
             })
     out_df = pd.DataFrame(rows)
 

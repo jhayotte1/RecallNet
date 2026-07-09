@@ -1,9 +1,10 @@
 import json
 from pathlib import Path
 from langchain.chat_models import init_chat_model
+from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 
 from .output import BatchEvaluation
-from .config import MODEL_NAME, MODEL_PROVIDER, TEMPERATURE, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY, PREDICATE_REG_PATH
+from .config import MODEL_NAME, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY, PREDICATE_REG_PATH
 from .batching import format_batch
 
 SYSTEM_PROMPT = SYSTEM_PROMPT_PATH.read_text()
@@ -11,13 +12,17 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_PATH.read_text()
 with open(PREDICATE_REG_PATH, "r") as f:
     PREDICATE_REG = json.load(f)
 
-
 def build_classifier():
-    model = init_chat_model(
-        model=MODEL_NAME,
-        model_provider=MODEL_PROVIDER,
-        temperature=TEMPERATURE
+    llm = HuggingFacePipeline.from_model_id(
+        model_id=MODEL_NAME,
+        task="text-generation",
+        devide_map="auto",
+        pipeline_kwargs=dict(
+            max_new_tokens=2048,
+            do_sample=False,
+        ),
     )
+    model = ChatHuggingFace(llm=llm)
     return model.with_structured_output(BatchEvaluation)
 
 def build_prompt(predicate: str):

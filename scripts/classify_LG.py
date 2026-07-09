@@ -5,11 +5,11 @@ from pathlib import Path
 from langchain_pipeline.batching import make_batches
 from langchain_pipeline.classify import classify_batches
 from langchain_pipeline.classify import build_prompt
-from langchain_pipeline.config import BATCH_SIZE, MODEL_NAME, SYSTEM_PROMPT_PATH
+from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
 DATA_DIR  = Path(__file__).parent.parent / "data"
-RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME
+RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT
 
 #####
 
@@ -47,7 +47,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
 
     out_dir = RESULT_DIR/experiment_name/pred_parsed
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_df.to_csv(out_dir / f"pred_{MODEL_NAME}_{pred_parsed}.csv", index=False)
+    out_df.to_csv(out_dir / f"pred_{MODEL_NAME_LIGHT}_{pred_parsed}.csv", index=False)
 
     metrics_summary = {}
     for metric in ["meaningfulness", "typicality", "saliency"]:
@@ -60,7 +60,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
 
     with open(out_dir / f"{experiment_name}_config.txt", "w") as f:
         f.write(f"Experiment: {experiment_name}\n")
-        f.write(f"Model: {MODEL_NAME}\n")
+        f.write(f"Model: {MODEL_NAME_LIGHT}\n")
         f.write(f"Experiment description: {experiment_desc}\n")
         f.write(f"Predicate evaluated: {pred}")
         f.write(f"Sample size: {sample_size}\n")
@@ -75,7 +75,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
         f.write(f"\n{'='*50}\n")
         f.write(f"PROMPT:\n\n{formatted_prompt}\n")
     
-    print(f"\n=== {experiment_name} ({MODEL_NAME}) ===")
+    print(f"\n=== {experiment_name} ({MODEL_NAME_LIGHT}) ===")
     print(f"Total: {total_time:.1f}s | Avg: {avg_time:.2f}s/triplet")
     print(f"Saved to {out_dir}")
 

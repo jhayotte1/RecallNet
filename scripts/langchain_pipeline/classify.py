@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-from langchain.chat_models import init_chat_model
 from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 
 from .output import BatchEvaluation
@@ -16,7 +15,7 @@ def build_classifier():
     llm = HuggingFacePipeline.from_model_id(
         model_id=MODEL_NAME,
         task="text-generation",
-        devide_map="auto",
+        device_map="auto",
         pipeline_kwargs=dict(
             max_new_tokens=2048,
             do_sample=False,

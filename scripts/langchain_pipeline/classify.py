@@ -1,11 +1,14 @@
 import json
 from pathlib import Path
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
+import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GenerationConfig
 
 from .output import BatchEvaluation
 from .config import MODEL_NAME, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY, PREDICATE_REG_PATH
 from .batching import format_batch
+
+transformers.logging.set_verbosity_error()
 
 SYSTEM_PROMPT = SYSTEM_PROMPT_PATH.read_text()
 

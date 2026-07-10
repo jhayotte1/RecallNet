@@ -1,8 +1,11 @@
 import json
 import time
 from pathlib import Path
+import transformers
+# import torch
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GenerationConfig, BitsAndBytesConfig
+
 
 from .output import BatchEvaluation
 from .config import MODEL_NAME, SYSTEM_PROMPT_PATH, MAX_CONCURRENCY, PREDICATE_REG_PATH
@@ -16,12 +19,12 @@ with open(PREDICATE_REG_PATH, "r") as f:
     PREDICATE_REG = json.load(f)
 
 def build_classifier():
+    # bnb_config = BitsAndBytesConfig(load_in_4bit=True)
     tokenizer = AutoTokenizer.from_pretrained(
         MODEL_NAME,
     )
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
-        dtype="float16",
         device_map="auto",
     )
     model.generation_config = GenerationConfig(

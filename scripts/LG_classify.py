@@ -83,7 +83,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     return out_df
 
 if __name__ == "__main__":
-    pred = "capable of"
+    pred = "used for"
     pred_parsed = pred.strip().replace(" ", "")
 
     print(f"Loading quasi_sample_{pred_parsed}.csv")
@@ -96,4 +96,3 @@ if __name__ == "__main__":
         pred=pred,
         sample_size=100,
     )
-

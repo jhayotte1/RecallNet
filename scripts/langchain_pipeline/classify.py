@@ -2,7 +2,6 @@ import json
 import time
 from pathlib import Path
 import transformers
-# import torch
 from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, GenerationConfig, BitsAndBytesConfig
 

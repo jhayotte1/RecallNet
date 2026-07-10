@@ -32,17 +32,17 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
         if result is None:
             errors += len(batch)
             continue
-        for idx_str, evaluation in result["evaluations"].items():
+        for idx_str, evaluation in result.evaluations.items():
             idx = int(idx_str)
             s, p, o = batch[idx]
             rows.append({
                 "subject": s,
                 "predicate": p,
                 "object": o,
-                "meaningfulness": evaluation["meaningfulness"],
-                "typicality": evaluation["typicality"],
-                "saliency": evaluation["saliency"],
-                "reason": evaluation["reasoning"],
+                "meaningfulness": evaluation.meaningfulness,
+                "typicality": evaluation.typicality,
+                "saliency": evaluation.saliency,
+                "reason": evaluation.reasoning,
             })
     out_df = pd.DataFrame(rows)
 
@@ -83,7 +83,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     return out_df
 
 if __name__ == "__main__":
-    pred = "used for"
+    pred = "at location"
     pred_parsed = pred.strip().replace(" ", "")
 
     print(f"Loading quasi_sample_{pred_parsed}.csv")
@@ -91,8 +91,8 @@ if __name__ == "__main__":
 
     results = run_experiment(
         df=df_sample,
-        experiment_name="exp01_LG",
-        experiment_desc="Langchain Pipeline, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, 4 bits model loading",
+        experiment_name="exp02_LG",
+        experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation",
         pred=pred,
         sample_size=100,
     )

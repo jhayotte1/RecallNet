@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
     results = run_experiment(
         df=df_sample,
-        experiment_name="exp02_LG",
+        experiment_name="exp03_LG",
         experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation",
         pred=pred,
         sample_size=100,

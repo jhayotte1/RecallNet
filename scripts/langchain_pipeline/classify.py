@@ -19,7 +19,7 @@ def build_classifier():
         model_provider=MODEL_PROVIDER,
         temperature=TEMPERATURE
     )
-    return model_chat.with_structured_output(BatchEvaluation, method="json_mode")
+    return model_chat.with_structured_output(BatchEvaluation, method="json_schema")
 
 def build_prompt(predicate: str):
     pred_dic = PREDICATE_REG[predicate]

@@ -1,0 +1,822 @@
+{
+    "at location": {
+      "definition": "B is a typical location where A can be found.",
+      "example": "(butter, AtLocation, refrigerator)",
+      "scoring_examples": [
+        {
+          "triple": "(butter, at location, refrigerator)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Perfectly meaningful and typical"
+        },
+        {
+          "triple": "(jealousy, at location, running)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Nonsence triple"
+        },
+        {
+          "triple": "(penguin, at location, desert)",
+          "meaningfullness": "5",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "The triple is easily understandable, but factualy false"
+        },
+        {
+          "triple": "(air, at location, outside)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "1",
+          "reasoning": "Pretty meaningful but air is not only outside and not the main property of air."
+        },
+        {
+          "triple": "(book, at location, bathroom)",
+          "meaningfullness": "5",
+          "typicality": "3",
+          "saliency": "2",
+          "reasoning": "Very meaningful, it is common to put book in bathroom but not the first place to think of"
+        }
+      ]
+    },
+    "capable of": {
+      "definition": "Something that A can typically do is B.",
+      "example": "(knife, CapableOf, cut)",
+      "scoring_examples": [
+        {
+          "triple": "(bird, capable of, fly)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Perfectly meaningful and typical, main property of bird."
+        },
+        {
+          "triple": "(red, capable of, furniture)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Triple does not make sense at all."
+        },
+        {
+          "triple": "(fish, capable of, climb tree)",
+          "meaningfullness": "5",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Triple is meaningful and easy to understand, but completly false."
+        },
+        {
+          "triple": "(human, CapableOf, breathe)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "1",
+          "reasoning": "Meaningful and true but trivial relation"
+        },
+        {
+          "triple": "(people, capable of, coffee)",
+          "meaningfullness": "2",
+          "typicality": "3",
+          "saliency": "1",
+          "reasoning": "Not very meaningful, could understand 'drink coffee', pretty typical but not very salient"
+        }
+      ]
+    },
+    "causes": {
+      "definition": "A and B are events or actions, A typically causes B to happen.",
+      "example": "(exercise, Causes, sweat)",
+      "scoring_examples": [
+        {
+          "triple": "(fire, causes, smoke)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Completly meaningful, almost always true and one of the main property of fire."
+        },
+        {
+          "triple": "(triangle, causes, purple)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful at all"
+        },
+        {
+          "triple": "(reading, causes, headache)",
+          "meaningfullness": "4",
+          "typicality": "2",
+          "saliency": "2",
+          "reasoning": "Meaningful, true some times but not a general thing, not a notable trait."
+        },
+        {
+          "triple": "(rain, causes, wet ground)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "3",
+          "reasoning": ""
+        },
+        {
+          "triple": "(coffee, causes, energy)",
+          "meaningfullness": "4",
+          "typicality": "4",
+          "saliency": "5",
+          "reasoning": "Meaningful enough, generaly true, one of the most important trait of coffee"
+        }
+      ]
+    },
+    "cause desire": {
+      "definition": "A makes someone want B.",
+      "example": "(having no food, CausesDesire, go to a store)",
+      "scoring_examples": [
+        {
+          "triple": "(thirst, causes desire, drink water)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Perfectly meaningful, true and salient"
+        },
+        {
+          "triple": "(square, causes desire, eat)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful, nonsense"
+        },
+        {
+          "triple": "(hunger, causes desire, eating strike)",
+          "meaningfullness": "1",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Contradictory predicate"
+        },
+        {
+          "triple": "(gym, causes desire, exercice)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "4",
+          "reasoning": "Not always true but one of the main property of the gym"
+        },
+        {
+          "triple": "(rain, causes desire, stay inside)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "3",
+          "reasoning": "Meaningful enough, generaly true, notable trait"
+        }
+      ]
+    },
+    "created by": {
+      "definition": "B is a process or agent that creates A.",
+      "example": "(cake, CreatedBy, bake)",
+      "scoring_examples": [
+        {
+          "triple": "(bread, created by, baking)",
+          "meaningfullness": "4",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningful and true relation"
+        },
+        {
+          "triple": "(speed, created by, yellow)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful at all."
+        },
+        {
+          "triple": "(diamond, created by, volcano)",
+          "meaningfullness": "3",
+          "typicality": "1",
+          "saliency": "2",
+          "reasoning": "Meaningful but not the real process"
+        },
+        {
+          "triple": "(sound, created by, vibration)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "3",
+          "reasoning": "Meaningful and true, but not first trait to come to mind."
+        },
+        {
+          "triple": "(music, created by, computer)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "3",
+          "reasoning": "Meaningful, true some time but the first trait to come to mind"
+        }
+      ]
+    },
+    "defined as": {
+      "definition": "A and B overlap in meaning, B is a more explanatory version of A.",
+      "example": "(peace, DefinedAs, absence of war)",
+      "scoring_examples": [
+        {
+          "triple": "(bachelor, defined as, unmarried man)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Meaningful, generaly true and salient"
+        },
+        {
+          "triple": "(cat, defined as, run fast)",
+          "meaningfullness": "3",
+          "typicality": "2",
+          "saliency": "1",
+          "reasoning": "Not very meaningful, not the best predicat to define the relation"
+        },
+        {
+          "triple": "(freedom, defined as, doing whatever you want)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "5",
+          "reasoning": "Meaningful, generaly true, first trait to come to mind"
+        },
+        {
+          "triple": "(water, defined as, liquid)",
+          "meaningfullness": "5",
+          "typicality": "3",
+          "saliency": "2",
+          "reasoning": "Meaningful but pretty vague, not the best definition"
+        },
+        {
+          "triple": "(home, defined as, living place)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Correct definition"
+        }
+      ]
+    },
+    "desires": {
+      "definition": "A is a conscious entity that typically wants B. Many assertions of this type use the word 'person' as A.",
+      "example": "(person, Desires, love)",
+      "scoring_examples": [
+        {
+          "triple": "(person, desire, happiness)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "5",
+          "reasoning": "Meaningful, generaly true and salient"
+        },
+        {
+          "triple": "(rock, desire, vacation)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Rock is not a conscious entity"
+        },
+        {
+          "triple": "(man, desire, food)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "2",
+          "reasoning": "Meaningful and true, but trivial relationship"
+        },
+        {
+          "triple": "(cat, desire, revenge)",
+          "meaningfullness": "5",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "Meaninful but not a generaly true fact"
+        },
+        {
+          "triple": "(student, desire, sleep)",
+          "meaningfullness": "5",
+          "typicality": "3",
+          "saliency": "3",
+          "reasoning": "Very Meaningfull, stereotype but mostly true"
+        }
+      ]
+    },
+    "distinct from": {
+      "definition": "A and B are distinct members of a set; something that is A is not B. Symmetric.",
+      "example": "(red, DistinctFrom, blue)",
+      "scoring_examples": [
+        {
+          "triple": "(cat, distinct form, dog)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "True, subject and object are from the same set and often compared as distinct"
+        },
+        {
+          "triple": "(water tap, distinct from, water)",
+          "meaningfullness": "4",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Tautological relationship"
+        },
+        {
+          "triple": "(apple, distinct from, democracy)",
+          "meaningfullness": "4",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "True but not relevant, both object and subject are not from the same set of concept."
+        },
+        {
+          "triple": "(left, distinct from, right)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "2",
+          "reasoning": "Perfectly meaningful and always true, but trivial relationship"
+        },
+        {
+          "triple": "(lake, distinct from, pond)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "2",
+          "reasoning": "Vague distinction"
+        }
+      ]
+    },
+    "has a": {
+      "definition": "B belongs to A, either as an inherent part or due to possession.",
+      "example": "(bird, HasA, wing)",
+      "scoring_examples": [
+        {
+          "triple": "(bird, has a, wing)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningful and true relation"
+        },
+        {
+          "triple": "(silence, has a, 20)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful at all"
+        },
+        {
+          "triple": "(Fish, has a, lung)",
+          "meaningfullness": "4",
+          "typicality": "1",
+          "saliency": "3",
+          "reasoning": "Meaningful but generaly false"
+        },
+        {
+          "triple": "(human, has a, skin)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "1",
+          "reasoning": "Meaningful and true, but very trivial"
+        },
+        {
+          "triple": "(city, has a, personality)",
+          "meaningfullness": "2",
+          "typicality": "2",
+          "saliency": "1",
+          "reasoning": "Metaphorical and not very sensical"
+        }
+      ]
+    },
+    "has subevent": {
+      "definition": "A and B are events, B happens as part of A.",
+      "example": "(eating, HasSubevent, chewing)",
+      "scoring_examples": [
+        {
+          "triple": "(cooking, has subevent, eating)",
+          "meaningfullness": "5",
+          "typicality": "1",
+          "saliency": "1",
+          "reasoning": "Meaningful and eating is not a subevent of cooking."
+        },
+        {
+          "triple": "(sleeping, has subevent, juggling)",
+          "meaningfullness": "2",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "Not related terms and false"
+        },
+        {
+          "triple": "(eating, has subevent, crying)",
+          "meaningfullness": "4",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "Can happen but very rare"
+        },
+        {
+          "triple": "(walking, has subevent, moving legs)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "2",
+          "reasoning": "Meaningful and true, a bit trivial"
+        },
+        {
+          "triple": "(shopping, has subevent, comparing price)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "4",
+          "reasoning": "Generaly true, but not systemic"
+        }
+      ]
+    },
+    "has first subevent": {
+      "definition": "A is an event that begins with subevent B.",
+      "example": "(sleep, HasFirstSubevent, close eyes)",
+      "scoring_examples": [
+        {
+          "triple": "(cooking, has first subevent, gather ingredient)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningful and true relation"
+        },
+        {
+          "triple": "(swimming, has first subevent, run)",
+          "meaningfullness": "3",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful, nonsense, and false"
+        },
+        {
+          "triple": "(exam, has first subevent, pray)",
+          "meaningfullness": "4",
+          "typicality": "1",
+          "saliency": "1",
+          "reasoning": "Can be true but not a genral thing"
+        },
+        {
+          "triple": "(reading, has first subevent, open the book)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Meaningful, true salient"
+        },
+        {
+          "triple": "(driving, has first subevent, adjust mirrors)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "3",
+          "reasoning": "Meaningful, true, notable trait"
+        }
+      ]
+    },
+    "has last subevent": {
+      "definition": "A is an event that concludes with subevent B.",
+      "example": "(cook, HasLastSubevent, clean up)",
+      "scoring_examples": [
+        {
+          "triple": "(meal, has last subevent, wash dishes)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "3",
+          "reasoning": "Meaningful and true, notable trait"
+        },
+        {
+          "triple": "(running, has last subevent, planting a tree)",
+          "meaningfullness": "2",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful, nonsense, and false"
+        },
+        {
+          "triple": "(exam, has last subevent, celebrate)",
+          "meaningfullness": "5",
+          "typicality": "3",
+          "saliency": "1",
+          "reasoning": "Meaningful and true some times, but not really part of the exam"
+        },
+        {
+          "triple": "(shower, has last subevent, turn off water)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "3",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(movie, has last subevent, credit rolls)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "3",
+          "reasoning": "Meaningful and generaly true"
+        }
+      ]
+    },
+    "has prerequisite": {
+      "definition": "In order for A to happen, B needs to happen; B is a dependency of A.",
+      "example": "(dream, HasPrerequisite, sleep)",
+      "scoring_examples": [
+        {
+          "triple": "(drive, has prerequisite, have a car)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Completly meaningful, almost always true and one of the main property."
+        },
+        {
+          "triple": "(breathe, has prerequisite, buy a house)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful at all"
+        },
+        {
+          "triple": "(Cook, has prerequisite, be hungry)",
+          "meaningfullness": "4",
+          "typicality": "2",
+          "saliency": "1",
+          "reasoning": "Be hungry is not a absolute prerequisite for cooking"
+        },
+        {
+          "triple": "(read, has prerequisite, open eyes)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "1",
+          "reasoning": "True but not relevant, trivial relationship"
+        },
+        {
+          "triple": "(travel abroad, has prerequisite, speak the language)",
+          "meaningfullness": "4",
+          "typicality": "2",
+          "saliency": "1",
+          "reasoning": "Meaningful but rarely true, and not the main trait"
+        }
+      ]
+    },
+    "has property": {
+      "definition": "A has B as one of its properties; A can be described as B.",
+      "example": "(ice, HasProperty, cold)",
+      "scoring_examples": [
+        {
+          "triple": "(ice, has property, cold)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningfull, always true, main property of ice"
+        },
+        {
+          "triple": "(stone, has property, jealous)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful and false relationship"
+        },
+        {
+          "triple": "(ocean, has property, dangerous)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "3",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(fire, has property, hot)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Perfectly meaningful and typical, main property."
+        },
+        {
+          "triple": "(sleep, has property, healthy)",
+          "meaningfullness": "2",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not very meaningful"
+        }
+      ]
+    },
+    "made of": {
+      "definition": "A is made of B.",
+      "example": "(bottle, MadeOf, plastic)",
+      "scoring_examples": [
+        {
+          "triple": "(paper, made of, wood)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(idea, made of, iron)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Idea is an abstract concept and is not made of iron"
+        },
+        {
+          "triple": "(cloud, made of, cotton)",
+          "meaningfullness": "3",
+          "typicality": "0",
+          "saliency": "1",
+          "reasoning": "Beliefs that is not true and not relevant"
+        },
+        {
+          "triple": "(table, made of, matter)",
+          "meaningfullness": "3",
+          "typicality": "5",
+          "saliency": "1",
+          "reasoning": "Not so meaningful, true, but no relevant information, trivial relationship"
+        },
+        {
+          "triple": "(sushi, made of, fish)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "3",
+          "reasoning": "Meaningful and generaly true"
+        }
+      ]
+    },
+    "manner of": {
+      "definition": "A is a specific way to do B. Similar to IsA but for verbs.",
+      "example": "(sprint, MannerOf, run)",
+      "scoring_examples": [
+        {
+          "triple": "(whisper, manner of, speak)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Meaningful and factualy true relationship"
+        },
+        {
+          "triple": "(sprint, manner of, eat)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful and false relationship"
+        },
+        {
+          "triple": "(crawl, manner of, move)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "0",
+          "reasoning": "Meaningful and generaly true, but uncommon way of moving"
+        },
+        {
+          "triple": "(jog, manner of, run)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "3",
+          "reasoning": "Meaningful and true"
+        },
+        {
+          "triple": "(scribble, manner of, write)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Meaningful and generaly true"
+        }
+      ]
+    },
+    "motivated by goal": {
+      "definition": "Someone does A because they want result B. A is a step toward accomplishing the goal B.",
+      "example": "(study, MotivatedByGoal, pass exam)",
+      "scoring_examples": [
+        {
+          "triple": "(study, motivated by goal, pass exam)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "4",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(eat, motivated by goal, become invisible)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful and false relationship"
+        },
+        {
+          "triple": "(lie, motivated by goal, protect someone)",
+          "meaningfullness": "5",
+          "typicality": "2",
+          "saliency": "2",
+          "reasoning": "Meaningful, can be true but not first trait to come to mind."
+        },
+        {
+          "triple": "(exercise, motivated by goal, look good)",
+          "meaningfullness": "5",
+          "typicality": "3",
+          "saliency": "3",
+          "reasoning": "Meaningful, sometimes true, notable trait."
+        },
+        {
+          "triple": "(fight, motivate by goal, win)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "2",
+          "reasoning": "Meaningful, sometimes true, not first trait to think of"
+        }
+      ]
+    },
+    "part of": {
+      "definition": "A is a part of B.",
+      "example": "(wheel, PartOf, car)",
+      "scoring_examples": [
+        {
+          "triple": "(arm bone, part of, arm)",
+          "meaningfullness": "4",
+          "typicality": "5",
+          "saliency": "0",
+          "reasoning": "Mostly meaningful, always true, but tautological"
+        },
+        {
+          "triple": "(cloud, part of, bicycle)",
+          "meaningfullness": "1",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful, nonsense, and false"
+        },
+        {
+          "triple": "(Luck, part of, success)",
+          "meaningfullness": "5",
+          "typicality": "2",
+          "saliency": "2",
+          "reasoning": "Meaningful but not a generaly true fact"
+        },
+        {
+          "triple": "(letter, part of, word)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "2",
+          "reasoning": "Meaningful and true, not so salient"
+        },
+        {
+          "triple": "(wheel, part of, bicycle)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Meaningful and generaly true"
+        }
+      ]
+    },
+    "receives action": {
+      "definition": "B can be done to A.",
+      "example": "(food, ReceivesAction, eat)",
+      "scoring_examples": [
+        {
+          "triple": "(ball, receives action, kick)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(idea, receives action, melt)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful and false relationship"
+        },
+        {
+          "triple": "(person, receives action, download)",
+          "meaningfullness": "2",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful, nonsense, non applicable to a human"
+        },
+        {
+          "triple": "(food, receives action, touch)",
+          "meaningfullness": "4",
+          "typicality": "3",
+          "saliency": "2",
+          "reasoning": "Meaningful, sometimes true, not first trait to think of"
+        },
+        {
+          "triple": "(tree, receives action, hug)",
+          "meaningfullness": "3",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "Meaningful, possible but very rare and uncommon"
+        }
+      ]
+    },
+    "used for": {
+      "definition": "A is used for B; the purpose of A is B.",
+      "example": "(knife, UsedFor, cutting)",
+      "scoring_examples": [
+        {
+          "triple": "(sun glasses, used for, protect eye)",
+          "meaningfullness": "5",
+          "typicality": "5",
+          "saliency": "5",
+          "reasoning": "Meaningful and generaly true"
+        },
+        {
+          "triple": "(pillow, used for, solving equation)",
+          "meaningfullness": "0",
+          "typicality": "0",
+          "saliency": "0",
+          "reasoning": "Not meaningful and false relationship"
+        },
+        {
+          "triple": "(butter knife, used for, opening a door)",
+          "meaningfullness": "3",
+          "typicality": "1",
+          "saliency": "0",
+          "reasoning": "Can be true in some cases, but not a common usage of a butter knife"
+        },
+        {
+          "triple": "(chair, used for, sitting)",
+          "meaningfullness": "5",
+          "typicality": "4",
+          "saliency": "4",
+          "reasoning": "Meaningful and generaly true, a bit trivial though"
+        },
+        {
+          "triple": "(phone, used for, flashlight)",
+          "meaningfullness": "5",
+          "typicality": "2",
+          "saliency": "2",
+          "reasoning": "Meaningful, can be true but not first trait to come to mind."
+        }
+      ]
+    }
+  }

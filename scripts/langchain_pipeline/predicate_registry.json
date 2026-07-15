@@ -4,39 +4,39 @@
       "example": "(butter, AtLocation, refrigerator)",
       "scoring_examples": [
         {
-          "triple": "(butter, at location, refrigerator)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Perfectly meaningful and typical"
+          "triple": "(cat, at location, house)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 4,
+          "reasoning": "The statement 'a cat can be found in a house' is perfectly clear and understandable (M=5). Cats are indeed commonly found in houses, this is true for the vast majority of domestic cats (T=5). It is one of the first locations people would associate with cats (S=4)."
         },
         {
-          "triple": "(jealousy, at location, running)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Nonsence triple"
+          "triple": "(happiness, at location, refrigerator)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Happiness is an abstract emotion and cannot have a physical location like a refrigerator. The statement is semantically incoherent (M=0). Since it is incomprehensible, typicality and saliency are also 0."
         },
         {
-          "triple": "(penguin, at location, desert)",
-          "meaningfullness": "5",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "The triple is easily understandable, but factualy false"
+          "triple": "(elephant, at location, supermarket)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'an elephant can be found in a supermarket' is perfectly clear and easy to picture (M=5). However, elephants are virtually never found in supermarkets (T=0), and no one would associate supermarkets with elephants (S=0)."
         },
         {
-          "triple": "(air, at location, outside)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "1",
-          "reasoning": "Pretty meaningful but air is not only outside and not the main property of air."
+          "triple": "(person, at location, room)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "The statement is clear (M=5) and universally true — people are very often found in rooms (T=5). However, it is so generic and obvious that no one would mention 'room' as a notable location for people (S=1)."
         },
         {
-          "triple": "(book, at location, bathroom)",
-          "meaningfullness": "5",
-          "typicality": "3",
-          "saliency": "2",
-          "reasoning": "Very meaningful, it is common to put book in bathroom but not the first place to think of"
+          "triple": "(mushroom, at location, pizza)",
+          "meaningfulness": 4,
+          "typicality": 3,
+          "saliency": 2,
+          "reasoning": "The statement is understandable, though 'pizza' is not a typical location in the spatial sense — it is more of an ingredient context (M=4). Mushrooms are found on pizzas fairly often but not universally (T=3). It is not a primary association people make with mushrooms (S=2)."
         }
       ]
     },
@@ -45,39 +45,39 @@
       "example": "(knife, CapableOf, cut)",
       "scoring_examples": [
         {
-          "triple": "(bird, capable of, fly)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Perfectly meaningful and typical, main property of bird."
+          "triple": "(dog, capable of, bark)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear statement (M=5). Virtually all dogs can bark (T=5), and barking is one of the first things people associate with dogs (S=5)."
         },
         {
-          "triple": "(red, capable of, furniture)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Triple does not make sense at all."
+          "triple": "(silence, capable of, running)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Silence is an abstract concept and cannot perform physical actions. The combination is semantically incoherent (M=0)."
         },
         {
-          "triple": "(fish, capable of, climb tree)",
-          "meaningfullness": "5",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Triple is meaningful and easy to understand, but completly false."
+          "triple": "(cat, capable of, swim)",
+          "meaningfulness": 5,
+          "typicality": 2,
+          "saliency": 0,
+          "reasoning": "The statement 'a cat can swim' is perfectly understandable (M=5). While technically some cats can swim, it is true only in rare cases and most cats avoid water (T=1). Nobody would associate swimming with cats (S=0)."
         },
         {
-          "triple": "(human, CapableOf, breathe)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "1",
-          "reasoning": "Meaningful and true but trivial relation"
+          "triple": "(human, capable of, sleep)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), universally true for all humans (T=5). However, the ability to sleep is so basic and shared by all animals that it is trivial and not a defining trait of humans (S=1)."
         },
         {
-          "triple": "(people, capable of, coffee)",
-          "meaningfullness": "2",
-          "typicality": "3",
-          "saliency": "1",
-          "reasoning": "Not very meaningful, could understand 'drink coffee', pretty typical but not very salient"
+          "triple": "(robot, capable of, feel emotion)",
+          "meaningfulness": 4,
+          "typicality": 1,
+          "saliency": 2,
+          "reasoning": "The statement is understandable but slightly ambiguous — 'feel' implies subjective experience which is debatable for robots (M=4). Currently false for virtually all robots (T=1). It is a somewhat notable topic of discussion about robots but not a primary association (S=2)."
         }
       ]
     },
@@ -86,39 +86,39 @@
       "example": "(exercise, Causes, sweat)",
       "scoring_examples": [
         {
-          "triple": "(fire, causes, smoke)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Completly meaningful, almost always true and one of the main property of fire."
+          "triple": "(fire, causes, burn)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear causal statement (M=5). Fire virtually always causes burns on contact (T=5), and burning is one of the defining consequences of fire (S=5)."
         },
         {
-          "triple": "(triangle, causes, purple)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful at all"
+          "triple": "(purple, causes, triangle)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A color cannot cause a geometric shape. There is no conceivable causal link and the statement is semantically incoherent (M=0)."
         },
         {
-          "triple": "(reading, causes, headache)",
-          "meaningfullness": "4",
-          "typicality": "2",
-          "saliency": "2",
-          "reasoning": "Meaningful, true some times but not a general thing, not a notable trait."
+          "triple": "(singing, causes, earthquake)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'singing causes an earthquake' is perfectly clear — one can easily understand the claimed causal chain (M=5). However, singing does not cause earthquakes in any real scenario (T=0), and no one would associate earthquakes with singing (S=0)."
         },
         {
-          "triple": "(rain, causes, wet ground)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "3",
-          "reasoning": ""
+          "triple": "(breathing, causes, oxygen intake)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear causal statement (M=5), universally true (T=5). However, this is a trivially obvious biological fact that would not be notable or informative to mention (S=1)."
         },
         {
-          "triple": "(coffee, causes, energy)",
-          "meaningfullness": "4",
-          "typicality": "4",
-          "saliency": "5",
-          "reasoning": "Meaningful enough, generaly true, one of the most important trait of coffee"
+          "triple": "(stress, causes, creativity)",
+          "meaningfulness": 4,
+          "typicality": 2,
+          "saliency": 1,
+          "reasoning": "The causal link is understandable, though the mechanism is indirect (M=4). Stress can sometimes lead to creativity, but this is true only for a minority of people and situations (T=2). It is a known but debated association (S=2)."
         }
       ]
     },
@@ -127,39 +127,39 @@
       "example": "(having no food, CausesDesire, go to a store)",
       "scoring_examples": [
         {
-          "triple": "(thirst, causes desire, drink water)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Perfectly meaningful, true and salient"
+          "triple": "(cold weather, cause desire, wear jacket)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Cold weather makes virtually everyone want to wear a jacket (T=5), and this is one of the most immediate associations with cold weather (S=5)."
         },
         {
-          "triple": "(square, causes desire, eat)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful, nonsense"
+          "triple": "(number seven, cause desire, triangle)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A number cannot cause desire for a geometric shape. The statement has no coherent meaning (M=0)."
         },
         {
-          "triple": "(hunger, causes desire, eating strike)",
-          "meaningfullness": "1",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Contradictory predicate"
+          "triple": "(sunshine, cause desire, go skiing)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement is easy to understand — sunshine makes someone want to go skiing (M=5). However, sunshine typically makes people want outdoor warm-weather activities, not skiing (T=0). No one associates sunshine with a desire to ski (S=0)."
         },
         {
-          "triple": "(gym, causes desire, exercice)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "4",
-          "reasoning": "Not always true but one of the main property of the gym"
+          "triple": "(tiredness, cause desire, rest)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), universally true (T=5). But the link between tiredness and wanting rest is so obvious and automatic that it carries no informational value (S=1)."
         },
         {
-          "triple": "(rain, causes desire, stay inside)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "3",
-          "reasoning": "Meaningful enough, generaly true, notable trait"
+          "triple": "(boredom, cause desire, clean house)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 1,
+          "reasoning": "Clear and understandable (M=5). Some people do clean when bored, but this is not a majority behavior (T=2). It is a recognizable but not primary association with boredom (S=2)."
         }
       ]
     },
@@ -168,39 +168,39 @@
       "example": "(cake, CreatedBy, bake)",
       "scoring_examples": [
         {
-          "triple": "(bread, created by, baking)",
-          "meaningfullness": "4",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningful and true relation"
+          "triple": "(statue, created by, sculptor)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Statues are by definition created by sculptors (T=5), and this is the defining relationship (S=5)."
         },
         {
-          "triple": "(speed, created by, yellow)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful at all."
+          "triple": "(gravity, created by, happiness)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Gravity is a fundamental physical force and cannot be created by an emotion. The statement is incoherent (M=0)."
+        },
+        {
+          "triple": "(earthquake, created by, music)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'an earthquake is created by music' is perfectly understandable as a claim (M=5). However, music does not create earthquakes (T=0), and nobody would make this association (S=0)."
+        },
+        {
+          "triple": "(shadow, created by, blocking light)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), physically accurate for all shadows (T=5). However, this is a basic physics fact that most people would consider trivially obvious (S=1)."
         },
         {
           "triple": "(diamond, created by, volcano)",
-          "meaningfullness": "3",
-          "typicality": "1",
-          "saliency": "2",
-          "reasoning": "Meaningful but not the real process"
-        },
-        {
-          "triple": "(sound, created by, vibration)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "3",
-          "reasoning": "Meaningful and true, but not first trait to come to mind."
-        },
-        {
-          "triple": "(music, created by, computer)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "3",
-          "reasoning": "Meaningful, true some time but the first trait to come to mind"
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 2,
+          "reasoning": "The statement is clear and understandable (M=5). While volcanic activity involves heat and pressure, diamonds are specifically formed in the mantle, not by volcanoes directly — the association is partially correct but misleading (T=1). Some people do loosely associate diamonds with volcanic processes (S=2)."
         }
       ]
     },
@@ -210,38 +210,38 @@
       "scoring_examples": [
         {
           "triple": "(bachelor, defined as, unmarried man)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Meaningful, generaly true and salient"
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "This is a textbook definition, perfectly clear (M=5). The definition holds for virtually all uses of the word (T=5), and it is the primary meaning people think of (S=5)."
         },
         {
-          "triple": "(cat, defined as, run fast)",
-          "meaningfullness": "3",
-          "typicality": "2",
-          "saliency": "1",
-          "reasoning": "Not very meaningful, not the best predicat to define the relation"
+          "triple": "(lamp, defined as, running fast)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A lamp has no semantic connection to running fast as a definition. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(freedom, defined as, doing whatever you want)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "5",
-          "reasoning": "Meaningful, generaly true, first trait to come to mind"
+          "triple": "(whale, defined as, type of fish)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 1,
+          "reasoning": "The statement is perfectly comprehensible as a proposed definition (M=5). However, whales are mammals, not fish — this definition is factually wrong (T=0). It is a well-known misconception, which gives it slight saliency (S=1)."
         },
         {
           "triple": "(water, defined as, liquid)",
-          "meaningfullness": "5",
-          "typicality": "3",
-          "saliency": "2",
-          "reasoning": "Meaningful but pretty vague, not the best definition"
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 1,
+          "reasoning": "Clear definition (M=5). Water is indeed a liquid in most everyday contexts, though it can also be solid or gas (T=4). However, this definition is overly vague — many things are liquids — making it uninformative (S=1)."
         },
         {
-          "triple": "(home, defined as, living place)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Correct definition"
+          "triple": "(freedom, defined as, doing whatever you want)",
+          "meaningfulness": 4,
+          "typicality": 3,
+          "saliency": 4,
+          "reasoning": "Understandable but somewhat imprecise as a definition — freedom involves constraints and context (M=4). This captures a common but incomplete understanding (T=3). It is one of the first things people think of when defining freedom (S=4)."
         }
       ]
     },
@@ -250,39 +250,39 @@
       "example": "(person, Desires, love)",
       "scoring_examples": [
         {
-          "triple": "(person, desire, happiness)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "5",
-          "reasoning": "Meaningful, generaly true and salient"
+          "triple": "(child, desires, toy)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Children universally want toys (T=5), and it is one of the most iconic associations with children (S=5)."
         },
         {
-          "triple": "(rock, desire, vacation)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Rock is not a conscious entity"
+          "triple": "(rock, desires, vacation)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A rock is not a conscious entity and cannot have desires. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(man, desire, food)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "2",
-          "reasoning": "Meaningful and true, but trivial relationship"
+          "triple": "(cat, desires, revenge)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 0,
+          "reasoning": "The statement 'a cat wants revenge' is immediately understandable — cats are conscious entities and we can easily picture a vengeful cat (M=5). However, revenge requires complex intentionality that cats do not possess, making it true only as anthropomorphism (T=1). Not a real association (S=0)."
         },
         {
-          "triple": "(cat, desire, revenge)",
-          "meaningfullness": "5",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "Meaninful but not a generaly true fact"
+          "triple": "(person, desires, oxygen)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), biologically true for all humans (T=5). But desiring oxygen is so automatic and unconscious that it is trivially obvious and not informative (S=1)."
         },
         {
-          "triple": "(student, desire, sleep)",
-          "meaningfullness": "5",
-          "typicality": "3",
-          "saliency": "3",
-          "reasoning": "Very Meaningfull, stereotype but mostly true"
+          "triple": "(student, desires, sleep)",
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Clear and understandable (M=5). It is a common stereotype that students want more sleep, true for many but not all (T=3). It is a reasonably well-known association (S=3)."
         }
       ]
     },
@@ -291,39 +291,39 @@
       "example": "(red, DistinctFrom, blue)",
       "scoring_examples": [
         {
-          "triple": "(cat, distinct form, dog)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "True, subject and object are from the same set and often compared as distinct"
+          "triple": "(cat, distinct from, dog)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Cats and dogs are always distinct animals from the same category of common pets (T=5). This is one of the most classic distinctions people make (S=5)."
         },
         {
-          "triple": "(water tap, distinct from, water)",
-          "meaningfullness": "4",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Tautological relationship"
+          "triple": "(blue, distinct from, very)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A color and an adverb cannot be meaningfully compared as distinct members of a set. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(apple, distinct from, democracy)",
-          "meaningfullness": "4",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "True but not relevant, both object and subject are not from the same set of concept."
+          "triple": "(butter, distinct from, margarine)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 3,
+          "reasoning": "The statement is perfectly clear — butter and margarine are often compared (M=5). However, they are very similar products that many people use interchangeably, so the distinction is debatable and not clear-cut (T=1). It is a well-known debate in cooking and nutrition (S=3)."
         },
         {
           "triple": "(left, distinct from, right)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "2",
-          "reasoning": "Perfectly meaningful and always true, but trivial relationship"
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), always true by definition (T=5). However, this is such an obvious and universal opposition that stating it carries almost no information (S=1)."
         },
         {
           "triple": "(lake, distinct from, pond)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "2",
-          "reasoning": "Vague distinction"
+          "meaningfulness": 4,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Understandable but the boundary between lake and pond is genuinely blurry — they overlap in many cases (M=4). True for typical examples but debatable for borderline cases (T=3). A reasonably notable distinction in geography (S=3)."
         }
       ]
     },
@@ -332,39 +332,39 @@
       "example": "(bird, HasA, wing)",
       "scoring_examples": [
         {
-          "triple": "(bird, has a, wing)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningful and true relation"
+          "triple": "(car, has a, engine)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Virtually all cars have engines (T=5), and the engine is one of the defining components of a car (S=5)."
         },
         {
-          "triple": "(silence, has a, 20)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful at all"
+          "triple": "(silence, has a, wheel)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Silence is an abstract concept and cannot possess physical parts. The statement is semantically incoherent (M=0)."
         },
         {
-          "triple": "(Fish, has a, lung)",
-          "meaningfullness": "4",
-          "typicality": "1",
-          "saliency": "3",
-          "reasoning": "Meaningful but generaly false"
+          "triple": "(fish, has a, leg)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'a fish has a leg' is perfectly understandable (M=5). However, fish do not have legs (T=0), and nobody would associate legs with fish (S=0)."
         },
         {
-          "triple": "(human, has a, skin)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "1",
-          "reasoning": "Meaningful and true, but very trivial"
+          "triple": "(human, has a, cell)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), true for all humans — the human body contains trillions of cells (T=5). But this is a very basic biological fact, too generic and obvious to be notable (S=1)."
         },
         {
-          "triple": "(city, has a, personality)",
-          "meaningfullness": "2",
-          "typicality": "2",
-          "saliency": "1",
-          "reasoning": "Metaphorical and not very sensical"
+          "triple": "(tree, has a, personality)",
+          "meaningfulness": 3,
+          "typicality": 1,
+          "saliency": 1,
+          "reasoning": "The statement is understandable in a metaphorical sense, but trees are not conscious beings so 'personality' is a stretch (M=3). Rarely attributed to trees except in figurative language (T=1). Not a common association (S=1)."
         }
       ]
     },
@@ -373,39 +373,39 @@
       "example": "(eating, HasSubevent, chewing)",
       "scoring_examples": [
         {
-          "triple": "(cooking, has subevent, eating)",
-          "meaningfullness": "5",
-          "typicality": "1",
-          "saliency": "1",
-          "reasoning": "Meaningful and eating is not a subevent of cooking."
+          "triple": "(cooking, has subevent, chopping vegetables)",
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 4,
+          "reasoning": "Clear (M=5). Chopping vegetables is a very common part of cooking, though not present in every dish (T=4). It is among the first sub-activities people associate with cooking (S=4)."
         },
         {
-          "triple": "(sleeping, has subevent, juggling)",
-          "meaningfullness": "2",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "Not related terms and false"
+          "triple": "(gravity, has subevent, purple)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Gravity is a physical force, not an event, and 'purple' is a color, not an action. There is no conceivable event-subevent relationship here — the statement is semantically incoherent (M=0)."
         },
         {
-          "triple": "(eating, has subevent, crying)",
-          "meaningfullness": "4",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "Can happen but very rare"
+          "triple": "(swimming, has subevent, writing letter)",
+          "meaningfulness": 4,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "One can understand the claim that writing a letter happens during swimming — the sentence is grammatically and semantically parseable (M=4). But it is false in practice — you cannot write while swimming (T=0). No association between the two (S=0)."
         },
         {
-          "triple": "(walking, has subevent, moving legs)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "2",
-          "reasoning": "Meaningful and true, a bit trivial"
+          "triple": "(walking, has subevent, moving body)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear statement (M=5), always true by definition (T=5). However, 'moving body' is so generic and obvious as a sub-event of walking that it adds no useful information (S=1)."
         },
         {
-          "triple": "(shopping, has subevent, comparing price)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "4",
-          "reasoning": "Generaly true, but not systemic"
+          "triple": "(shopping, has subevent, trying on clothes)",
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Clear (M=5). Trying on clothes is common when shopping for clothing, but not when shopping for groceries or electronics (T=3). A notable but context-dependent sub-event (S=3)."
         }
       ]
     },
@@ -414,39 +414,39 @@
       "example": "(sleep, HasFirstSubevent, close eyes)",
       "scoring_examples": [
         {
-          "triple": "(cooking, has first subevent, gather ingredient)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningful and true relation"
+          "triple": "(cooking, has first subevent, gather ingredients)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Clear statement (M=5). Gathering ingredients is almost universally the first step of cooking (T=5), and it is the most iconic starting point people think of (S=5)."
         },
         {
-          "triple": "(swimming, has first subevent, run)",
-          "meaningfullness": "3",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful, nonsense, and false"
+          "triple": "(running, has first subevent, painting wall)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Painting a wall has no connection to the start of running. The combination is incoherent as a first-subevent claim (M=0)."
         },
         {
-          "triple": "(exam, has first subevent, pray)",
-          "meaningfullness": "4",
-          "typicality": "1",
-          "saliency": "1",
-          "reasoning": "Can be true but not a genral thing"
+          "triple": "(swimming, has first subevent, eat sandwich)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'swimming begins with eating a sandwich' is understandable as a claim (M=5). But eating a sandwich is not how swimming starts (T=0), and no one would think of this (S=0)."
         },
         {
-          "triple": "(reading, has first subevent, open the book)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Meaningful, true salient"
+          "triple": "(reading, has first subevent, have eyes open)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear (M=5), universally true — you must have your eyes open to read (T=5). But this is so obvious and generic that it is trivially uninformative (S=1)."
         },
         {
-          "triple": "(driving, has first subevent, adjust mirrors)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "3",
-          "reasoning": "Meaningful, true, notable trait"
+          "triple": "(exam, has first subevent, read instructions)",
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 3,
+          "reasoning": "Clear statement (M=5). Most exams begin with reading the instructions, though some students skip this step (T=4). A notable and recognizable first step (S=3)."
         }
       ]
     },
@@ -455,39 +455,39 @@
       "example": "(cook, HasLastSubevent, clean up)",
       "scoring_examples": [
         {
-          "triple": "(meal, has last subevent, wash dishes)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "3",
-          "reasoning": "Meaningful and true, notable trait"
+          "triple": "(movie, has last subevent, credits roll)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Clear (M=5). Virtually every movie ends with credits rolling (T=5), and it is the defining ending moment of a film (S=5)."
         },
         {
-          "triple": "(running, has last subevent, planting a tree)",
-          "meaningfullness": "2",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful, nonsense, and false"
+          "triple": "(sleeping, has last subevent, planting flower)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Planting a flower has no connection to the conclusion of sleeping. The statement is incoherent (M=0)."
+        },
+        {
+          "triple": "(dinner, has last subevent, go running)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'dinner ends with going running' is understandable (M=5). But running is not how dinners typically conclude (T=0), and no one would think of this association (S=0)."
+        },
+        {
+          "triple": "(shower, has last subevent, be wet)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear (M=5), always true — you are wet at the end of a shower (T=5). But this is so obvious that stating it adds no information (S=1)."
         },
         {
           "triple": "(exam, has last subevent, celebrate)",
-          "meaningfullness": "5",
-          "typicality": "3",
-          "saliency": "1",
-          "reasoning": "Meaningful and true some times, but not really part of the exam"
-        },
-        {
-          "triple": "(shower, has last subevent, turn off water)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "3",
-          "reasoning": "Meaningful and generaly true"
-        },
-        {
-          "triple": "(movie, has last subevent, credit rolls)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "3",
-          "reasoning": "Meaningful and generaly true"
+          "meaningfulness": 5,
+          "typicality": 2,
+          "saliency": 2,
+          "reasoning": "Clear statement (M=5). Some people celebrate after exams, but many don't — it depends on context and result (T=2). A recognizable but not universal association (S=2)."
         }
       ]
     },
@@ -496,39 +496,39 @@
       "example": "(dream, HasPrerequisite, sleep)",
       "scoring_examples": [
         {
-          "triple": "(drive, has prerequisite, have a car)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Completly meaningful, almost always true and one of the main property."
+          "triple": "(drive, has prerequisite, have license)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Clear (M=5). Having a license is legally required for virtually all driving (T=5), and it is the first prerequisite people think of (S=5)."
         },
         {
-          "triple": "(breathe, has prerequisite, buy a house)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful at all"
+          "triple": "(breathe, has prerequisite, buy shoes)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Buying shoes has no conceivable connection to breathing as a prerequisite. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(Cook, has prerequisite, be hungry)",
-          "meaningfullness": "4",
-          "typicality": "2",
-          "saliency": "1",
-          "reasoning": "Be hungry is not a absolute prerequisite for cooking"
+          "triple": "(cook, has prerequisite, be hungry)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 1,
+          "reasoning": "The statement 'cooking requires being hungry' is perfectly understandable (M=5). However, hunger is not a real prerequisite for cooking — people cook for many reasons including for others or for meal prep (T=1). Not a notable prerequisite (S=1)."
         },
         {
-          "triple": "(read, has prerequisite, open eyes)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "1",
-          "reasoning": "True but not relevant, trivial relationship"
+          "triple": "(read, has prerequisite, be alive)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 0,
+          "reasoning": "Clear statement (M=5), universally true — one must be alive to read (T=5). But this is vacuously true for any human activity and carries zero useful information (S=0)."
         },
         {
-          "triple": "(travel abroad, has prerequisite, speak the language)",
-          "meaningfullness": "4",
-          "typicality": "2",
-          "saliency": "1",
-          "reasoning": "Meaningful but rarely true, and not the main trait"
+          "triple": "(travel abroad, has prerequisite, have passport)",
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 4,
+          "reasoning": "Clear (M=5). A passport is required for most international travel, with few exceptions (T=4). It is one of the most commonly cited prerequisites for traveling abroad (S=4)."
         }
       ]
     },
@@ -537,39 +537,39 @@
       "example": "(ice, HasProperty, cold)",
       "scoring_examples": [
         {
-          "triple": "(ice, has property, cold)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningfull, always true, main property of ice"
-        },
-        {
-          "triple": "(stone, has property, jealous)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful and false relationship"
-        },
-        {
-          "triple": "(ocean, has property, dangerous)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "3",
-          "reasoning": "Meaningful and generaly true"
-        },
-        {
           "triple": "(fire, has property, hot)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Perfectly meaningful and typical, main property."
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Fire is always hot (T=5), and heat is the defining property of fire (S=5)."
         },
         {
-          "triple": "(sleep, has property, healthy)",
-          "meaningfullness": "2",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not very meaningful"
+          "triple": "(banana, has property, democratic)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A banana cannot have a political property. The combination of a fruit and a political concept is semantically incoherent (M=0)."
+        },
+        {
+          "triple": "(snow, has property, loud)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'snow is loud' is perfectly understandable (M=5). However, snow is known for being quiet, the opposite of loud (T=0). Nobody associates loudness with snow (S=0)."
+        },
+        {
+          "triple": "(water, has property, wet)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear (M=5), always true (T=5). But wetness is so inherently obvious for water that stating it provides no insight (S=1)."
+        },
+        {
+          "triple": "(coffee, has property, addictive)",
+          "meaningfulness": 4,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Understandable, though 'addictive' is more of a behavioral effect than an intrinsic property (M=4). True for many coffee drinkers but not universal (T=3). A well-known but not primary association (S=3)."
         }
       ]
     },
@@ -578,39 +578,39 @@
       "example": "(bottle, MadeOf, plastic)",
       "scoring_examples": [
         {
-          "triple": "(paper, made of, wood)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningful and generaly true"
+          "triple": "(bread, made of, flour)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Virtually all bread is made of flour (T=5), and flour is the first ingredient people associate with bread (S=5)."
         },
         {
           "triple": "(idea, made of, iron)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Idea is an abstract concept and is not made of iron"
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "An idea is abstract and cannot be made of a physical material. The statement is semantically incoherent (M=0)."
         },
         {
           "triple": "(cloud, made of, cotton)",
-          "meaningfullness": "3",
-          "typicality": "0",
-          "saliency": "1",
-          "reasoning": "Beliefs that is not true and not relevant"
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 2,
+          "reasoning": "The statement 'a cloud is made of cotton' is perfectly understandable — it evokes a well-known visual metaphor (M=5). Factually, clouds are made of water droplets, not cotton (T=0). The association is culturally recognizable as a common childhood belief (S=2)."
         },
         {
           "triple": "(table, made of, matter)",
-          "meaningfullness": "3",
-          "typicality": "5",
-          "saliency": "1",
-          "reasoning": "Not so meaningful, true, but no relevant information, trivial relationship"
+          "meaningfulness": 4,
+          "typicality": 5,
+          "saliency": 0,
+          "reasoning": "The statement is understandable but overly vague — everything is made of matter (M=4). Technically true for all tables (T=5). But it is so generic that it provides absolutely no useful information (S=0)."
         },
         {
-          "triple": "(sushi, made of, fish)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "3",
-          "reasoning": "Meaningful and generaly true"
+          "triple": "(guitar, made of, metal)",
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 2,
+          "reasoning": "Clear statement (M=5). Some guitars contain metal parts (strings, hardware) and electric guitars have more metal, but classical and acoustic guitars are primarily wood (T=3). Not the first material people associate with guitars (S=2)."
         }
       ]
     },
@@ -620,38 +620,38 @@
       "scoring_examples": [
         {
           "triple": "(whisper, manner of, speak)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Meaningful and factualy true relationship"
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Whispering is by definition a way of speaking (T=5), and it is one of the most recognized manners of speech (S=5)."
         },
         {
-          "triple": "(sprint, manner of, eat)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful and false relationship"
+          "triple": "(boil, manner of, sleep)",
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Boiling is not a way of sleeping. These are unrelated concepts and the statement is incoherent (M=0)."
+        },
+        {
+          "triple": "(drive, manner of, exercise)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 0,
+          "reasoning": "The statement 'driving is a way of exercising' is perfectly understandable as a claim (M=5). However, driving is a sedentary activity and would not count as exercise for virtually anyone (T=1). Nobody would associate driving with exercise (S=0)."
+        },
+        {
+          "triple": "(move, manner of, change position)",
+          "meaningfulness": 4,
+          "typicality": 5,
+          "saliency": 0,
+          "reasoning": "Understandable but nearly tautological — moving is essentially changing position (M=4). Always true (T=5). But the near-synonymy makes it uninformative and trivial (S=0)."
         },
         {
           "triple": "(crawl, manner of, move)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "0",
-          "reasoning": "Meaningful and generaly true, but uncommon way of moving"
-        },
-        {
-          "triple": "(jog, manner of, run)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "3",
-          "reasoning": "Meaningful and true"
-        },
-        {
-          "triple": "(scribble, manner of, write)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Meaningful and generaly true"
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 2,
+          "reasoning": "Clear statement (M=5). Crawling is indeed a way of moving, true in virtually all cases (T=4). It is a recognized but not primary manner of movement for most adults (S=2)."
         }
       ]
     },
@@ -661,38 +661,38 @@
       "scoring_examples": [
         {
           "triple": "(study, motivated by goal, pass exam)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "4",
-          "reasoning": "Meaningful and generaly true"
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Clear (M=5). Passing exams is the primary motivation for studying for the vast majority of students (T=5), and it is the first goal people associate with studying (S=5)."
         },
         {
           "triple": "(eat, motivated by goal, become invisible)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful and false relationship"
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "Eating cannot make someone invisible. The goal is impossible and the causal link is incoherent (M=0)."
         },
         {
-          "triple": "(lie, motivated by goal, protect someone)",
-          "meaningfullness": "5",
-          "typicality": "2",
-          "saliency": "2",
-          "reasoning": "Meaningful, can be true but not first trait to come to mind."
+          "triple": "(run, motivated by goal, learn piano)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'someone runs in order to learn piano' is understandable as a claimed motivation (M=5). But running has no connection to learning piano (T=0), and no one would make this association (S=0)."
+        },
+        {
+          "triple": "(eat, motivated by goal, not be hungry)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear (M=5), universally true — eating removes hunger (T=5). But this is the most basic and obvious motivation for eating, almost tautological in its triviality (S=1)."
         },
         {
           "triple": "(exercise, motivated by goal, look good)",
-          "meaningfullness": "5",
-          "typicality": "3",
-          "saliency": "3",
-          "reasoning": "Meaningful, sometimes true, notable trait."
-        },
-        {
-          "triple": "(fight, motivate by goal, win)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "2",
-          "reasoning": "Meaningful, sometimes true, not first trait to think of"
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Clear (M=5). Looking good is a common motivation for exercise but not the only one — health, stress relief, and sport are also major motivations (T=3). A well-known but not dominant motivation (S=3)."
         }
       ]
     },
@@ -701,39 +701,39 @@
       "example": "(wheel, PartOf, car)",
       "scoring_examples": [
         {
-          "triple": "(arm bone, part of, arm)",
-          "meaningfullness": "4",
-          "typicality": "5",
-          "saliency": "0",
-          "reasoning": "Mostly meaningful, always true, but tautological"
+          "triple": "(wheel, part of, car)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). All cars have wheels (T=5), and wheels are one of the most iconic parts of a car (S=5)."
         },
         {
           "triple": "(cloud, part of, bicycle)",
-          "meaningfullness": "1",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful, nonsense, and false"
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A cloud is not a component of a bicycle. The statement is semantically incoherent (M=0)."
         },
         {
-          "triple": "(Luck, part of, success)",
-          "meaningfullness": "5",
-          "typicality": "2",
-          "saliency": "2",
-          "reasoning": "Meaningful but not a generaly true fact"
+          "triple": "(wing, part of, submarine)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'a wing is part of a submarine' is understandable (M=5). But submarines do not have wings in the traditional sense (T=0), and nobody would associate wings with submarines (S=0)."
         },
         {
-          "triple": "(letter, part of, word)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "2",
-          "reasoning": "Meaningful and true, not so salient"
+          "triple": "(atom, part of, table)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 0,
+          "reasoning": "Clear (M=5), true for all tables — everything is made of atoms (T=5). But this is so generic that it provides no meaningful information about tables specifically (S=0)."
         },
         {
-          "triple": "(wheel, part of, bicycle)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Meaningful and generaly true"
+          "triple": "(luck, part of, success)",
+          "meaningfulness": 4,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Understandable, though the part-of relationship is more metaphorical than physical (M=4). Many people believe luck plays a role in success, but it is debatable (T=3). A well-known topic of discussion (S=3)."
         }
       ]
     },
@@ -743,38 +743,38 @@
       "scoring_examples": [
         {
           "triple": "(ball, receives action, kick)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Meaningful and generaly true"
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Balls are commonly kicked (T=5), and kicking is one of the primary actions associated with balls (S=5)."
         },
         {
           "triple": "(idea, receives action, melt)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful and false relationship"
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "An idea is abstract and cannot be physically melted. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(person, receives action, download)",
-          "meaningfullness": "2",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful, nonsense, non applicable to a human"
+          "triple": "(book, receives action, freeze)",
+          "meaningfulness": 5,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "The statement 'a book can be frozen' is clear — one can easily picture putting a book in a freezer (M=5). However, nobody freezes books in practice (T=0), and freezing is not an action anyone would associate with books (S=0)."
         },
         {
-          "triple": "(food, receives action, touch)",
-          "meaningfullness": "4",
-          "typicality": "3",
-          "saliency": "2",
-          "reasoning": "Meaningful, sometimes true, not first trait to think of"
+          "triple": "(object, receives action, touch)",
+          "meaningfulness": 5,
+          "typicality": 4,
+          "saliency": 0,
+          "reasoning": "Clear (M=5), true for virtually all physical objects (T=5). But 'being touched' is so generic that it says nothing specific about any object (S=0)."
         },
         {
-          "triple": "(tree, receives action, hug)",
-          "meaningfullness": "3",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "Meaningful, possible but very rare and uncommon"
+          "triple": "(bread, receives action, toast)",
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 3,
+          "reasoning": "Clear (M=5). Bread is commonly toasted, but not all bread gets toasted — many types are eaten fresh (T=3). Toasting is a recognizable but not primary action for bread overall (S=3)."
         }
       ]
     },
@@ -783,39 +783,39 @@
       "example": "(knife, UsedFor, cutting)",
       "scoring_examples": [
         {
-          "triple": "(sun glasses, used for, protect eye)",
-          "meaningfullness": "5",
-          "typicality": "5",
-          "saliency": "5",
-          "reasoning": "Meaningful and generaly true"
+          "triple": "(knife, used for, cutting)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 5,
+          "reasoning": "Perfectly clear (M=5). Cutting is the primary function of virtually all knives (T=5), and it is the defining purpose people associate with knives (S=5)."
         },
         {
           "triple": "(pillow, used for, solving equation)",
-          "meaningfullness": "0",
-          "typicality": "0",
-          "saliency": "0",
-          "reasoning": "Not meaningful and false relationship"
+          "meaningfulness": 0,
+          "typicality": 0,
+          "saliency": 0,
+          "reasoning": "A pillow has no functional connection to solving equations. The statement is incoherent (M=0)."
         },
         {
-          "triple": "(butter knife, used for, opening a door)",
-          "meaningfullness": "3",
-          "typicality": "1",
-          "saliency": "0",
-          "reasoning": "Can be true in some cases, but not a common usage of a butter knife"
+          "triple": "(hammer, used for, opening bottle)",
+          "meaningfulness": 5,
+          "typicality": 1,
+          "saliency": 0,
+          "reasoning": "The statement is clear — one can picture using a hammer to open a bottle (M=5). While technically possible in desperate situations, it is not a real use case for hammers (T=1). Nobody would think of this purpose (S=0)."
         },
         {
-          "triple": "(chair, used for, sitting)",
-          "meaningfullness": "5",
-          "typicality": "4",
-          "saliency": "4",
-          "reasoning": "Meaningful and generaly true, a bit trivial though"
+          "triple": "(chair, used for, supporting weight)",
+          "meaningfulness": 5,
+          "typicality": 5,
+          "saliency": 1,
+          "reasoning": "Clear (M=5), always true — chairs support weight by design (T=5). But this is a mechanical description of what chairs do, not how people would describe their purpose — people say 'sitting', not 'supporting weight' (S=1)."
         },
         {
           "triple": "(phone, used for, flashlight)",
-          "meaningfullness": "5",
-          "typicality": "2",
-          "saliency": "2",
-          "reasoning": "Meaningful, can be true but not first trait to come to mind."
+          "meaningfulness": 5,
+          "typicality": 3,
+          "saliency": 2,
+          "reasoning": "Clear (M=5). Phones are commonly used as flashlights, but it is a secondary function (T=3). It is a known use but not among the primary purposes people associate with phones (S=2)."
         }
       ]
     }

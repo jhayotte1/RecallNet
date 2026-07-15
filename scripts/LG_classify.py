@@ -84,18 +84,18 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
 
 if __name__ == "__main__":
     predicate_list = [
-#       "at location",
-#       "capable of",
-#       "causes",
-##       "cause desire",
-        # "created by",
-        # "defined as",
-        # "desires",
-        # "distinct from",
-        # "has a",
-        # "has subevent",
-        # "has first subevent",
-##        "has last subevent",
+        # "at location",
+        # "capable of",
+        "causes",
+#        "cause desire",
+        "created by",
+        "defined as",
+        "desires",
+        "distinct from",
+        "has a",
+        "has subevent",
+        "has first subevent",
+#        "has last subevent",
         "has prerequisite",
         "has property",
         "made of",
@@ -110,11 +110,12 @@ if __name__ == "__main__":
 
         print(f"Loading quasi_sample_{pred_parsed}.csv")
         df_sample = pd.read_csv(DATA_DIR / f"quasi_sample_{pred_parsed}.csv")
+        df_sample.columns = df_sample.columns.str.strip()
 
         results = run_experiment(
             df=df_sample,
-            experiment_name="exp03_LG",
-            experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, scoring example given",
+            experiment_name="exp04_LG",
+            experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, More relevant scoring example given",
             pred=pred,
             sample_size=100,
         )

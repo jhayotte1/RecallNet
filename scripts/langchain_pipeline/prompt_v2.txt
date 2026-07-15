@@ -14,16 +14,17 @@ Example: {predicate_example}
 ## Metric definitions
 
 **Meaningfulness** — Does this triple convey a coherent, understandable meaning?
-This metric captures whether the triple is interpretable as a real-world statement, regardless of whether it is true or important.
-- 0: Completely absurd or incomprehensible. The subject and object have no conceivable connection through this predicate, or a term is unrecognizable. (banana, HasProperty, democratic)
+This metric captures whether the triple is semantically parseable: can a human read it and immediately understand what claim is being made?
+- 0: Completely incomprehensible. A human cannot understand what claim is being made — the terms have no conceivable semantic connection through this predicate, or a term is unrecognizable. (banana, HasProperty, democratic)
 - 1: Technically parseable but nonsensical or self-contradictory.
 - 2: Marginally understandable but very forced or unusual.
 - 3: Understandable but vague, overly generic, or borderline tautological.
 - 4: Clear and coherent statement with minor ambiguity.
-- 5: Perfectly clear, well-formed, and immediately understandable.
+- 5: Perfectly clear and immediately understandable. A human instantly grasps the intended claim, even if that claim happens to be false.
 
 **Typicality** — Is the stated relation generally true for most instances of the subject?
 This metric captures how broadly the predicate-object property applies across instances of the subject concept.
+A rare but possible case should score low (T=1-2), not high — reserve high scores for properties that hold for the majority of instances.
 - 0: False for virtually all instances of the subject.
 - 1: True only in rare or contrived cases.
 - 2: True for a minority of instances.

@@ -21,17 +21,25 @@ def build_classifier():
     )
     return model_chat.with_structured_output(BatchEvaluation, method="json_schema")
 
+def format_scoring_examples(scoring_examples: list) -> str:
+    lines = ["## Scoring examples for this predicate\n"]
+    for i, ex in enumerate(scoring_examples):
+        lines.append(f"**Example {i+1}**: {ex['triple']}")
+        lines.append(f"- Meaningfulness: {ex['meaningfulness']}, Typicality: {ex['typicality']}, Saliency: {ex['saliency']}")
+        lines.append(f"- Reasoning: {ex['reasoning']}\n")
+    return "\n".join(lines)
+
 def build_prompt(predicate: str):
     pred_dic = PREDICATE_REG[predicate]
     pred_def = pred_dic["definition"]
     pred_ex = pred_dic["example"]
-    scoring_ex_dic = pred_dic["scoring_examples"]
+    scoring_ex = pred_dic["scoring_examples"]
     sys_prompt = SYSTEM_PROMPT
     return sys_prompt.format(
         predicate_name = predicate,
         predicate_definition = pred_def,
         predicate_example = pred_ex,
-        scoring_examples_block = ""
+        scoring_examples_block = format_scoring_examples(scoring_ex)
     )
 
 

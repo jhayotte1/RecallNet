@@ -25,7 +25,9 @@ def format_scoring_examples(scoring_examples: list) -> str:
     lines = ["## Scoring examples for this predicate\n"]
     for i, ex in enumerate(scoring_examples):
         lines.append(f"**Example {i+1}**: {ex['triple']}")
-        lines.append(f"- Meaningfulness: {ex['meaningfulness']}, Typicality: {ex['typicality']}, Saliency: {ex['saliency']}")
+        lines.append(f"- Meaningfulness: {ex['meaningfulness']}")
+        lines.append(f"- Typicality: {ex['typicality']}")
+        lines.append(f"- Saliency: {ex['saliency']}")
         lines.append(f"- Reasoning: {ex['reasoning']}\n")
     return "\n".join(lines)
 

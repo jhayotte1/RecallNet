@@ -1,6 +1,7 @@
 {
     "at location": {
       "definition": "B is a typical location where A can be found.",
+      "scope": "B should be a concrete",
       "example": "(butter, AtLocation, refrigerator)",
       "scoring_examples": [
         {

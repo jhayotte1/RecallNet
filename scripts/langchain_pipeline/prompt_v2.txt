@@ -16,6 +16,9 @@ Where Subject and Object are concepts or entities, and Predicate describes the r
 ## Predicate being evaluated
 
 **{predicate_name}**: {predicate_definition}
+- Direction : (A, predicate, B)
+- Scope:
+{predicate_scope}
 Example: {predicate_example}
 
 ## Metric definitions

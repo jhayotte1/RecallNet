@@ -34,12 +34,14 @@ def format_scoring_examples(scoring_examples: list) -> str:
 def build_prompt(predicate: str):
     pred_dic = PREDICATE_REG[predicate]
     pred_def = pred_dic["definition"]
+    pred_scope = pred_dic["scope"]
     pred_ex = pred_dic["example"]
     scoring_ex = pred_dic["scoring_examples"]
     sys_prompt = SYSTEM_PROMPT
     return sys_prompt.format(
         predicate_name = predicate,
         predicate_definition = pred_def,
+        predicate_scope = pred_scope,
         predicate_example = pred_ex,
         scoring_examples_block = format_scoring_examples(scoring_ex)
     )

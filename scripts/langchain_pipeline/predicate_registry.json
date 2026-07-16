@@ -1,7 +1,7 @@
 {
     "at location": {
-      "definition": "B is a typical location where A can be found.",
-      "scope": "B should be a concrete",
+      "definition": "B is a location where A can be found.",
+      "scope": "B can be a physical place, a container, a geographic region, or a contextual srtting where A appears.",
       "example": "(butter, AtLocation, refrigerator)",
       "scoring_examples": [
         {
@@ -42,7 +42,8 @@
       ]
     },
     "capable of": {
-      "definition": "Something that A can typically do is B.",
+      "definition": "A has the ability or potential to do B",
+      "scope": "A can be a person, a role, an object, or a group. This is about what A can do. Both physical actions and cognitive abilities are valid.",
       "example": "(knife, CapableOf, cut)",
       "scoring_examples": [
         {
@@ -83,7 +84,8 @@
       ]
     },
     "causes": {
-      "definition": "A and B are events or actions, A typically causes B to happen.",
+      "definition": "A is an event, action, or state that leads to B happening.",
+      "scope": "A and B are events or states. The causal link can be direct, probabilistic, or negative in outcome.",
       "example": "(exercise, Causes, sweat)",
       "scoring_examples": [
         {
@@ -125,6 +127,7 @@
     },
     "cause desire": {
       "definition": "A makes someone want B.",
+      "scope": "",
       "example": "(having no food, CausesDesire, go to a store)",
       "scoring_examples": [
         {
@@ -166,6 +169,7 @@
     },
     "created by": {
       "definition": "B is a process or agent that creates A.",
+      "scope": "B can be a person, an organization, a natural process, or an action. The relation is about origin and creation not about material composition or component structure.",
       "example": "(cake, CreatedBy, bake)",
       "scoring_examples": [
         {
@@ -207,6 +211,7 @@
     },
     "defined as": {
       "definition": "A and B overlap in meaning, B is a more explanatory version of A.",
+      "scope": "B should clarifiy or restate A's meaning, not merely describe one property of A.",
       "example": "(peace, DefinedAs, absence of war)",
       "scoring_examples": [
         {
@@ -248,6 +253,7 @@
     },
     "desires": {
       "definition": "A is a conscious entity that typically wants B. Many assertions of this type use the word 'person' as A.",
+      "scope": "A must be capable of having desires - humans, animals, or roles. Object ad abstract concepts cannot desire. B can be concrete or abstract.",
       "example": "(person, Desires, love)",
       "scoring_examples": [
         {
@@ -288,7 +294,8 @@
       ]
     },
     "distinct from": {
-      "definition": "A and B are distinct members of a set; something that is A is not B. Symmetric.",
+      "definition": "A and B are distinct members of a set or of a comparable category",
+      "scope": "A and B should belon to a shared semantic category for the distinction to be meaningful. Comparing items from entirely unrelated categories is incoherent",
       "example": "(red, DistinctFrom, blue)",
       "scoring_examples": [
         {
@@ -330,6 +337,7 @@
     },
     "has a": {
       "definition": "B belongs to A, either as an inherent part or due to possession.",
+      "scope": "B can b a physical component, a biological part or an abstratc attribute.",
       "example": "(bird, HasA, wing)",
       "scoring_examples": [
         {
@@ -371,6 +379,7 @@
     },
     "has subevent": {
       "definition": "A and B are events, B happens as part of A.",
+      "scope": "B should ba a step or phase within A, not merely something that can happen concurrently by coincidence. B should be a natural component of A", 
       "example": "(eating, HasSubevent, chewing)",
       "scoring_examples": [
         {
@@ -412,6 +421,7 @@
     },
     "has first subevent": {
       "definition": "A is an event that begins with subevent B.",
+      "scope": "B should be the specific initiating action of A.",
       "example": "(sleep, HasFirstSubevent, close eyes)",
       "scoring_examples": [
         {
@@ -453,6 +463,7 @@
     },
     "has last subevent": {
       "definition": "A is an event that concludes with subevent B.",
+      "scope": "B should be the natural closing action of A, still part of A itself. a seperate event that merely follows A chronologically is not a true last subevent", 
       "example": "(cook, HasLastSubevent, clean up)",
       "scoring_examples": [
         {
@@ -494,6 +505,7 @@
     },
     "has prerequisite": {
       "definition": "In order for A to happen, B needs to happen; B is a dependency of A.",
+      "scope": "B should be a specific, necessary dependency for A.", 
       "example": "(dream, HasPrerequisite, sleep)",
       "scoring_examples": [
         {
@@ -535,6 +547,7 @@
     },
     "has property": {
       "definition": "A has B as one of its properties; A can be described as B.",
+      "scope": "B should be an observable or recognizable quality - physical , behavioral, or abstract.",
       "example": "(ice, HasProperty, cold)",
       "scoring_examples": [
         {
@@ -576,6 +589,7 @@
     },
     "made of": {
       "definition": "A is made of B.",
+      "scope": "B should be a material or substance, not a component or part, not a producer or agent and not an abstract concept.",
       "example": "(bottle, MadeOf, plastic)",
       "scoring_examples": [
         {
@@ -617,6 +631,7 @@
     },
     "manner of": {
       "definition": "A is a specific way to do B. Similar to IsA but for verbs.",
+      "scope": "Both A and B should be verbs or actions, where A is a more specific variant of B. A should add meaningful specificity.",
       "example": "(sprint, MannerOf, run)",
       "scoring_examples": [
         {
@@ -657,7 +672,8 @@
       ]
     },
     "motivated by goal": {
-      "definition": "Someone does A because they want result B. A is a step toward accomplishing the goal B.",
+      "definition": "Someone performs action A in order to achieve outcome B.",
+      "scope": "B is the intended result that motivates A. The link should be purposeful and intentional.",
       "example": "(study, MotivatedByGoal, pass exam)",
       "scoring_examples": [
         {
@@ -698,7 +714,8 @@
       ]
     },
     "part of": {
-      "definition": "A is a part of B.",
+      "definition": "A is a component, section, or constituent of B",
+      "scope": "The relation can be physical, organizational, or conceptual.",
       "example": "(wheel, PartOf, car)",
       "scoring_examples": [
         {
@@ -740,6 +757,7 @@
     },
     "receives action": {
       "definition": "B can be done to A.",
+      "scope": "A should be the kind of entity that can logically undergo B.",
       "example": "(food, ReceivesAction, eat)",
       "scoring_examples": [
         {
@@ -780,7 +798,8 @@
       ]
     },
     "used for": {
-      "definition": "A is used for B; the purpose of A is B.",
+      "definition": "A is used for B.",
+      "scope": "B should describe a purpose. ",
       "example": "(knife, UsedFor, cutting)",
       "scoring_examples": [
         {

@@ -8,7 +8,7 @@ from langchain_pipeline.classify import build_prompt
 from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-DATA_DIR  = Path(__file__).parent.parent / "data" / "sample_data"
+DATA_DIR  = Path(__file__).parent.parent / "data" / "sample_data_1k_top_100k"
 RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "scoring_exp" 
 
 #####
@@ -78,7 +78,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     
     print(f"\n=== {experiment_name} ({MODEL_NAME_LIGHT}) ===")
     print(f"Total: {total_time:.1f}s | Avg: {avg_time:.2f}s/triplet")
-    print(f"Saved to {out_dir}")
+    print(f"Saved to {out_dir}\n\n")
 
     return out_df
 
@@ -107,15 +107,18 @@ if __name__ == "__main__":
     ]
     for pred in predicate_list:
         pred_parsed = pred.strip().replace(" ", "")
+        try: 
+            print(f"Loading quasi_sample_{pred_parsed}.csv")
+            df_sample = pd.read_csv(DATA_DIR / f"quasi_sample_{pred_parsed}.csv")
+            df_sample.columns = df_sample.columns.str.strip()
 
-        print(f"Loading quasi_sample_{pred_parsed}.csv")
-        df_sample = pd.read_csv(DATA_DIR / f"quasi_sample_{pred_parsed}.csv")
-        df_sample.columns = df_sample.columns.str.strip()
-
-        results = run_experiment(
-            df=df_sample,
-            experiment_name="exp01_LG",
-            experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, More relevant scoring example given",
-            pred=pred,
-            sample_size=100,
-        )
+            results = run_experiment(
+                df=df_sample,
+                experiment_name="exp01_LG",
+                experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, More relevant scoring example given",
+                pred=pred,
+                sample_size=100,
+            )
+        except Exception as e:
+            print(f"Error on predicate'{pred} : {e}\n")
+            continue

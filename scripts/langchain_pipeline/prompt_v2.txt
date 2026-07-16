@@ -54,7 +54,7 @@ This metric captures whether the relation is among the most prominent, defining,
 2. **Do not invent facts.** If you are not sure whether a factual claim is true, score Typicality low. Do not fabricate justifications.
 3. **Meaningfulness gates the other scores.** If Meaningfulness ≤ 2, then Typicality and Saliency must also be ≤ 2.
 4. **Be strict with 5s.** A score of 5 means you are fully confident. If there is any hesitation, use 4 or lower.
-5. **Watch for tautologies.** If Subject and Object are identical, synonymous, or the Object simply repeats a word from the Subject, Saliency should be low (0-1) regardless of other scores.
+5. **Watch for tautologies.** If Subject and Object are identical, synonymous, or the Object simply repeats a word from the Subject, Saliency and Meaningfulness should score low (0-1).
 
 {scoring_examples_block}
 

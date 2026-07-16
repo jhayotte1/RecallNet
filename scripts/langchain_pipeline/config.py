@@ -2,9 +2,9 @@ from pathlib import Path
 
 PACKAGE_DIR = Path(__file__).parent
 
-MODEL_NAME = "llama3.1:8b"
+MODEL_NAME = "llama3.3:70b"
 MODEL_PROVIDER = "ollama"
-MODEL_NAME_LIGHT = "llama3.1:8b"
+MODEL_NAME_LIGHT = "llama3.3:70b"
 BATCH_SIZE = 10
 MAX_CONCURRENCY = 1
 TEMPERATURE = 0

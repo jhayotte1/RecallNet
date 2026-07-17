@@ -1,4 +1,5 @@
 import time
+import argparse
 import pandas as pd
 from pathlib import Path
 
@@ -8,10 +9,39 @@ from langchain_pipeline.classify import build_prompt
 from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-DATA_DIR  = Path(__file__).parent.parent / "data" / "sample_data_1k_top_100k"
+DATA_DIR  = Path(__file__).parent.parent / "data"
 RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "scoring_exp" 
 
-#####
+PREDICATE_LIST = [
+        "at location",
+        "capable of",
+        "causes",
+        "cause desire",
+        "created by",
+        "defined as",
+        "desires",
+        "distinct from",
+        "has a",
+        "has subevent",
+        "has first subevent",
+        "has last subevent",
+        "has prerequisite",
+        "has property",
+        "made of",
+        "manner of",
+        "motivated by goal",
+        "part of",
+        "receives action",
+        "used for"
+    ]
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="RecallNet scoring pipeline")
+    parser.add_argument("--data-dir", type=str, required=True, help="Data directory name")
+    parser.add_argument("--exp-name", type=str, default="exp00_LG", help="Experiment name")
+    parser.add_argument("--exp-desc", type=str, default="Default experiment", help="Experiment description")
+    parser.add_argument("--sample-size", type=int, default=100)
+    return parser.parse_args()
 
 def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100, pred: str=""):
     pred_parsed = pred.strip().replace(" ", "").lower()
@@ -83,29 +113,9 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
     return out_df
 
 if __name__ == "__main__":
-    predicate_list = [
-        "at location",
-        "capable of",
-        "causes",
-#        "cause desire",
-        "created by",
-        "defined as",
-        "desires",
-        "distinct from",
-        "has a",
-        "has subevent",
-        "has first subevent",
-#        "has last subevent",
-        "has prerequisite",
-        "has property",
-        "made of",
-        "manner of",
-        "motivated by goal",
-        "part of",
-        "receives action",
-        "used for"
-    ]
-    for pred in predicate_list:
+    args = parse_args()
+    data_dir = Path(DATA_DIR / args.data_dir)
+    for pred in PREDICATE_LIST:
         pred_parsed = pred.strip().replace(" ", "")
         try: 
             print(f"Loading quasi_sample_{pred_parsed}.csv")
@@ -114,10 +124,10 @@ if __name__ == "__main__":
 
             results = run_experiment(
                 df=df_sample,
-                experiment_name="exp01_LG",
-                experiment_desc="Langchain Pipeline WITH Ollama, Scoring 3 metrics : Meaningfulness/Typicality/Saliency, single predicate evaluation, More relevant scoring example given",
+                experiment_name=args.exp_name,
+                experiment_desc=args.exp_desc,
                 pred=pred,
-                sample_size=100,
+                sample_size=args.sample_size,
             )
         except Exception as e:
             print(f"Error on predicate'{pred} : {e}\n")

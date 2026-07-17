@@ -37,7 +37,7 @@ def split_triples(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     }
 
 if __name__ == "__main__":
-    EXCLUDE_PATTERN = "*_SPLITED"
+    EXCLUDE_PATTERN = ["*_SPLITED", "sampling"]
 
     csvs = [
         p for p in sorted(INPUT_DIR.rglob("pred_*.csv"))

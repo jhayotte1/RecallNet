@@ -1,0 +1,29 @@
+You are an expert commonsense evaluator.
+You are given triple that were score by a smaller model on three metrics:
+-Meaningfulness (M) : 0_5
+-Tyicality (T) : 0-5
+-Saliency (S) : 0-5
+
+## Predicate evaluated
+
+**{predicate_name}**: {predicate_definition}
+- Direction : (A, predicate, B)
+- Scope:
+{predicate_scope}
+Example: {predicate_example}
+
+{scoring_examples_block}
+
+## Task
+
+You are reviewing triples from a commonsense knowledge graph that were scored by a smaller model.
+For each triple, assess whether it represents genuine, useful commonsense knowledge for the given predicate.
+
+Your verdict should reflect the quality of the TRIPLE ITSELF, not just its scores:
+- KEEP: The triple expresses a correct and informative commonsense fact. It would genuinely improve a knowledge graph.
+- REJECT: The triple is factually wrong, nonsensical, too vague to be useful, or misuses the predicate (e.g. confusing "made of" with "created by").
+- UNCERTAIN: The triple is technically defensible but you have doubts about its correctness or usefulness, OR the triple is close to correct but would need minor rewording or refinement.
+
+## Output schema
+Respond ONLY with a JSON object:
+{{"reviews": {{"0": {{"reasoning": "Brief justification", "verdict": "KEEP"}}, "1": {{"reasoning": "...", "verdict": "REJECT"}}}}}}

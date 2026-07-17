@@ -10,3 +10,13 @@ class TripleEvaluation(BaseModel):
 
 class BatchEvaluation(BaseModel):
     evaluations: dict[str, TripleEvaluation]
+
+
+#For rule-mining
+class TripleReview(BaseModel):
+    reasoning: str = Field(description= "One sentence max")
+    verdict: str = Field(description= "KEEP, REJECT, or UNCERTAIN")
+
+class BatchReview(BaseModel):
+    reviews: dict[str, TripleReview]
+    

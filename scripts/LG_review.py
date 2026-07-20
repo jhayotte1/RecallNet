@@ -34,29 +34,31 @@ PRED_MAP = {
 
 def parse_args():
     parser = argparse.ArgumentParser(description="RecallNet scoring reviewing for rule mining")
-    parser.add_argument("--data-dir", type=str, required=True, help="Data directory name")
     parser.add_argument("--exp-name", type=str, default="exp00_LG", help="Experiment name")
-    parser.add_argument("--model-reviewed", type=str, required=True, default="llama3.1:8b", help="Name of model used for global scoring")
+    parser.add_argument("--model-reviewed", type=str, default="llama3.1:8b", help="Name of model used for global scoring")
     return parser.parse_args()
 
 def load_scored_csvs(sampling_dir: Path, model_reviewed: str) -> dict[str, pd.DataFrame]:
-    csvs = sampling_dir.glob("pred_*.csv")
+    csvs = sampling_dir.glob("sample_pred_*.csv")
     result = {}
     for csv_path in csvs:
-        pred = csv_path.stem.replace(f"pred_{model_reviewed}_", "")
+        pred = csv_path.stem.replace(f"sample_pred_{model_reviewed}_", "")
         result[pred] = pd.read_csv(csv_path)
     return result
 
-def run_review(df: pd.DataFrame, pred: str, exp_name: str, input_dir: Path, output_dir: Path):
+def run_review(df: pd.DataFrame, pred: str, output_dir: Path):
     # Build tuples with scores
     triples_with_scores = list(zip(
         df["subject"], df["predicate"], df["object"],
         df["meaningfulness"], df["typicality"], df["saliency"], df["reason"],
     ))
 
+    print("Making batches...")
     batches = make_batches(triples_with_scores, size=BATCH_SIZE)
+    print("Reviewing batches...")
     results, start_time = review_batches(batches, predicate=pred)
     total_time = time.time() - start_time
+    print("Reviewing done")
 
     rows = []
     errors = 0
@@ -69,10 +71,10 @@ def run_review(df: pd.DataFrame, pred: str, exp_name: str, input_dir: Path, outp
             s, p, o, m, t, sa, r = batch[idx]
             rows.append({
                 "subject": s, "predicate": p, "object": o,
-                "meaningfulness": m, "typicality": t, "saliency": sa,
-                "reason_8b": r,
                 "verdict": review.verdict,
                 "reason_review": review.reasoning,
+                "meaningfulness": m, "typicality": t, "saliency": sa,
+                "reason_8b": r,
             })
 
     out_df = pd.DataFrame(rows)
@@ -94,11 +96,14 @@ if __name__=="__main__":
     output_dir = Path(RESULTS_DIR, f"{args.model_reviewed}/scoring_exp/{args.exp_name}/0_REVIEW")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    scored_data = load_scored_csvs(input_dir)
+    print("Load scored csvs...")
+    scored_data = load_scored_csvs(input_dir, args.model_reviewed)
     for pred_key, df in scored_data.items():
         pred_name = PRED_MAP.get(pred_key, pred_key)
         try:
-            run_review(df, pred_name, "review", output_dir)
+            print(f"Review for {pred_name}")
+            run_review(df, pred_name, output_dir)
+            print("\n")
         except Exception as e:
             print(f"Error on '{pred_name}': {e}")
             continue

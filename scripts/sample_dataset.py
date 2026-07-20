@@ -105,16 +105,16 @@ if __name__ == "__main__":
     #         print(f"No triple with predicate = '{predicate}'")
 
     
-    # split_top_by_predicate(
-    #     df=df_quasi,
-    #     top_n=5000000,
-    #     output_dir=f"{DATA_DIR}/top_5M_by_predicate",
-    #     predicate_list=predicate_list,
-    # )
-
-    sampling_results(
-        size=100,
-        model_name="llama3.1:8b",
-        exp_name="exp05_LG_1k_top_100k"
+    split_top_by_predicate(
+        df=df_quasi,
+        top_n=5000000,
+        output_dir=f"{DATA_DIR}/top_5M_by_predicate",
+        predicate_list=predicate_list,
     )
+
+    # sampling_results(
+    #     size=100,
+    #     model_name="llama3.1:8b",
+    #     exp_name="exp05_LG_1k_top_100k"
+    # )
 

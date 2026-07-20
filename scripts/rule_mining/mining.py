@@ -28,7 +28,7 @@ def load_csvs(in_dir: Path):
     for csv_path in csvs:
         pred = csv_path.stem.replace("review_", "").replace(" ", "")
         df_pred = pd.read_csv(csv_path)
-        df_pred = df_pred.columns.str.strip()
+        df_pred.columns = df_pred.columns.str.strip()
         data[pred] = df_pred
     return data
 
@@ -76,7 +76,7 @@ def extract_rules(dt: DecisionTreeClassifier):
                 "conditions": list(conditions),
                 "verdict": majority,
                 "confidence": round(int(counts.max()) / n, 3),
-                "support": n,
+                "support": int(n),
                 "distribution": dist,
             })
             return

@@ -26,6 +26,14 @@ FEATURES = ["meaningfulness", "typicality", "saliency"]
 LABELS = ["KEEP", "UNCERTAIN", "REJECT"]
 
 
+def arg_parser():
+    parser = argparse.ArgumentParser(description="RecallNet rule mining from review data")
+    parser.add_argument("--review-dir", type=str, required=True, help="Directory with review CSVs")
+    parser.add_argument("--max-depth", type=int, default=3, help="Max tree depth (default: 3)")
+    parser.add_argument("--min-samples-leaf", type=int, default=5, help="Min samples per leaf (default: 5)")
+    parser.add_argument("--out-dir", type=str, default=".", help="Output directory for rules files")
+    args = parser.parse_args()
+    return args
 
 def load_reviews(review_dir: Path) -> dict[str, pd.DataFrame]:
     data = {}
@@ -155,13 +163,7 @@ def write_rules_txt(all_results: dict, out_path: Path, args):
 
 
 if __name__=="__main__":
-    parser = argparse.ArgumentParser(description="RecallNet rule mining from review data")
-    parser.add_argument("--review-dir", type=str, required=True, help="Directory with review CSVs")
-    parser.add_argument("--max-depth", type=int, default=3, help="Max tree depth (default: 3)")
-    parser.add_argument("--min-samples-leaf", type=int, default=5, help="Min samples per leaf (default: 5)")
-    parser.add_argument("--out-dir", type=str, default=".", help="Output directory for rules files")
-    args = parser.parse_args()
-
+    args = arg_parser()
     review_dir = Path(args.review_dir)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

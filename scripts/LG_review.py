@@ -47,6 +47,7 @@ def load_scored_csvs(sampling_dir: Path, model_reviewed: str) -> dict[str, pd.Da
     return result
 
 def run_review(df: pd.DataFrame, pred: str, output_dir: Path):
+    df.columns.str.strip()
     # Build tuples with scores
     triples_with_scores = list(zip(
         df["subject"], df["predicate"], df["object"],
@@ -84,7 +85,8 @@ def run_review(df: pd.DataFrame, pred: str, output_dir: Path):
 
     # Stats
     verdicts = out_df["verdict"].value_counts()
-    print(f"\n=== {pred} ({total_time:.1f}s) ===")
+    print(f"\n=== {pred} ===")
+    print(f"Total time: {total_time:.1f}s ; {total_time:.1f}s")
     print(f"KEEP: {verdicts.get('KEEP', 0)} | REJECT: {verdicts.get('REJECT', 0)} | UNCERTAIN: {verdicts.get('UNCERTAIN', 0)}")
     print(f"Errors: {errors}")
 
@@ -93,7 +95,7 @@ def run_review(df: pd.DataFrame, pred: str, output_dir: Path):
 if __name__=="__main__":
     args = parse_args()
     input_dir = Path(RESULTS_DIR, f"{args.model_reviewed}/scoring_exp/{args.exp_name}/0_SAMPLING")
-    output_dir = Path(RESULTS_DIR, f"{args.model_reviewed}/scoring_exp/{args.exp_name}/0_REVIEW")
+    output_dir = Path(RESULTS_DIR, f"{args.model_reviewed}/scoring_exp/{args.exp_name}/1_REVIEW")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print("Load scored csvs...")

@@ -48,6 +48,7 @@ def load_scored_csvs(sampling_dir: Path, model_reviewed: str) -> dict[str, pd.Da
 
 def run_review(df: pd.DataFrame, pred: str, output_dir: Path):
     df.columns.str.strip()
+    pred.strip().replace(" ", "_")
     # Build tuples with scores
     triples_with_scores = list(zip(
         df["subject"], df["predicate"], df["object"],

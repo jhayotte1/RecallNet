@@ -19,4 +19,12 @@ class TripleReview(BaseModel):
 
 class BatchReview(BaseModel):
     reviews: dict[str, TripleReview]
-    
+
+
+#Second filtering
+class TripleFilterDecision(BaseModel):
+    reasoning: str = Field(description="One sentence max")
+    decision: Literal["KEEP", "MODIFY", "REJECT"]
+
+class BatchFilterDecision(BaseModel):
+    filterdecision: dict[str, TripleFilterDecision]

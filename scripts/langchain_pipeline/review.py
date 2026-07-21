@@ -37,11 +37,14 @@ def build_review_prompt(predicate: str):
     )
 
 def review_batches(batches, predicate: str):
+    print("Building reviewer...")
     reviewer = build_reviewer()
+    print("Building prompt...")
     sys_prompt = build_review_prompt(predicate)
     all_messages = [
         build_message(format_review_batch(b), sys_prompt)
         for b in batches
     ]
+    print("Start inference...")
     start_time = time.time()
     return reviewer.batch(all_messages, config={"max_concurrency": MAX_CONCURRENCY}), start_time

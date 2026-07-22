@@ -8,8 +8,8 @@ from langchain_pipeline.filtering import review_batches, build_filtering_prompt
 from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT, MODEL_NAME
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-DATA_DIR = Path(__file__).parent.parent / "data"
-RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "second_filtering"
+RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "scoring_exp"
+
 
 PREDICATE_LIST = [
         "at location",
@@ -111,7 +111,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
 if __name__ == "__main__":
     args = parse_args()
     predicate_list = args.predicates
-    data_dir = Path(DATA_DIR / args.data_dir / "in_between")
+    data_dir = Path(RESULT_DIR / args.exp_name / args.split_dir / "in_between")
     for pred in predicate_list:
         pred_parsed = pred.strip().replace(" ", "")
         try:

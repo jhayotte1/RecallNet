@@ -9,12 +9,12 @@ source ~/.bashrc
 conda activate recallnet
 
 export RECALLNET_MODEL="llama3.1:8b"
-export RECALLNET_BATCH_SIZE=6
+export RECALLNET_BATCH_SIZE=10
 export RECALLNET_MAX_CONCURRENCY=6
 export RECALLNET_PROMPT="prompt_filter.txt"
 
 
-OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=10 ollama serve > /tmp/ollama.log 2>&1 &
+OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=6 ollama serve > /tmp/ollama.log 2>&1 &
 sleep 5
 
 cd /mnt/beegfs/projects/RecallNet/src/scripts

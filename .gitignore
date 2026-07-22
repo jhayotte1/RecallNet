@@ -2,7 +2,6 @@ data/
 results/
 __pycache__/
 *.pyc
-
-
 .vscode/
-.DS_store
+.DS_Store
+.venv/

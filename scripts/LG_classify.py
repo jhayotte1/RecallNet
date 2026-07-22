@@ -41,6 +41,7 @@ def parse_args():
     parser.add_argument("--exp-name", type=str, default="exp00_LG", help="Experiment name")
     parser.add_argument("--exp-desc", type=str, default="Default experiment", help="Experiment description")
     parser.add_argument("--sample-size", type=int, default=None)
+    parser.add_argument("--predicates", nargs="+", default=PREDICATE_LIST, help="Liste des prédicats à traiter")
     return parser.parse_args()
 
 def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100, pred: str=""):
@@ -93,7 +94,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
         f.write(f"Experiment: {experiment_name}\n")
         f.write(f"Model: {MODEL_NAME_LIGHT}\n")
         f.write(f"Experiment description: {experiment_desc}\n")
-        f.write(f"Predicate evaluated: {pred}")
+        f.write(f"Predicate evaluated: {pred}\n")
         f.write(f"Sample size: {sample_size if sample_size else 'full dataset'}\n")
         f.write(f"Batch size: {BATCH_SIZE}\n")
         f.write(f"Total inference time: {total_time:.1f}s ({total_time/60:.1f}min)\n")
@@ -114,12 +115,13 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
 
 if __name__ == "__main__":
     args = parse_args()
+    predicate_list = args.predicates
     data_dir = Path(DATA_DIR / args.data_dir)
-    for pred in PREDICATE_LIST:
+    for pred in predicate_list:
         pred_parsed = pred.strip().replace(" ", "")
         try: 
             print(f"Loading quasi_sample_{pred_parsed}.csv")
-            df_sample = pd.read_csv(DATA_DIR / f"quasi_sample_{pred_parsed}.csv")
+            df_sample = pd.read_csv(f"{data_dir}/quasi_top5000000_{pred_parsed}.csv")
             df_sample.columns = df_sample.columns.str.strip()
 
             results = run_experiment(
@@ -129,6 +131,7 @@ if __name__ == "__main__":
                 pred=pred,
                 sample_size=args.sample_size,
             )
+            del df_sample
         except Exception as e:
             print(f"Error on predicate'{pred} : {e}\n")
             continue

@@ -1,6 +1,7 @@
 import time
 import argparse
 import pandas as pd
+import re
 from pathlib import Path
 
 from langchain_pipeline.batching import make_batches
@@ -10,7 +11,7 @@ from langchain_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
 DATA_DIR  = Path(__file__).parent.parent / "data"
-RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "scoring_exp" 
+RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT / "final_process" 
 
 PREDICATE_LIST = [
         "at location",
@@ -44,9 +45,7 @@ def parse_args():
     parser.add_argument("--predicates", nargs="+", default=PREDICATE_LIST, help="Liste des prédicats à traiter")
     return parser.parse_args()
 
-def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100, pred: str=""):
-    pred_parsed = pred.strip().replace(" ", "").lower()
-    
+def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str, sample_size: int=100, pred: str="", pred_n_parsed:str=""):    
     triple_list = list(zip(df['subject'], df['predicate'], df['object']))
 
     print("Making batches")
@@ -77,9 +76,9 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
             })
     out_df = pd.DataFrame(rows)
 
-    out_dir = RESULT_DIR/experiment_name/pred_parsed
+    out_dir = RESULT_DIR/experiment_name/pred_n_parsed
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_df.to_csv(out_dir / f"pred_{MODEL_NAME_LIGHT}_{pred_parsed}.csv", index=False)
+    out_df.to_csv(out_dir / f"pred_{MODEL_NAME_LIGHT}_{pred_n_parsed}.csv", index=False)
 
     metrics_summary = {}
     for metric in ["meaningfulness", "typicality", "saliency"]:
@@ -117,11 +116,13 @@ if __name__ == "__main__":
     args = parse_args()
     predicate_list = args.predicates
     data_dir = Path(DATA_DIR / args.data_dir)
-    for pred in predicate_list:
+    for pred_n in predicate_list:
+        pred_n_parsed = pred_n.strip().replace(" ", "")
+        pred = re.sub(r"_\d+$", "", pred_n.strip())
         pred_parsed = pred.strip().replace(" ", "")
-        try: 
-            print(f"Loading quasi_sample_{pred_parsed}.csv")
-            df_sample = pd.read_csv(f"{data_dir}/quasi_sample_{pred_parsed}.csv")
+        try:     
+            print(f"Loading quasi_top5000000_{pred_n_parsed}.csv")
+            df_sample = pd.read_csv(f"{data_dir}/quasi_top5000000_{pred_n_parsed}.csv")
             df_sample.columns = df_sample.columns.str.strip()
 
             results = run_experiment(
@@ -130,6 +131,7 @@ if __name__ == "__main__":
                 experiment_desc=args.exp_desc,
                 pred=pred,
                 sample_size=args.sample_size,
+                pred_n_parsed=pred_n_parsed,
             )
             del df_sample
         except Exception as e:

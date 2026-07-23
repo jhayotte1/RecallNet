@@ -27,7 +27,7 @@ PREDS=("has property_5" "at location_3")
 cd /mnt/beegfs/projects/RecallNet/src/scripts
 python3 LG_classify_2.py \
     --data-dir top_5M_by_predicate \
-    --exp-name exp07 \
+    --exp-name exp08 \
     --exp-desc "Final scoring, first pass" \
     --predicates "${PREDS[@]}"
 

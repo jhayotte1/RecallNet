@@ -93,7 +93,7 @@ def run_experiment(df: pd.DataFrame, experiment_name: str, experiment_desc: str,
         f.write(f"Experiment: {experiment_name}\n")
         f.write(f"Model: {MODEL_NAME_LIGHT}\n")
         f.write(f"Experiment description: {experiment_desc}\n")
-        f.write(f"Predicate evaluated: {pred}\n")
+        f.write(f"Predicate evaluated: {pred_n_parsed}\n")
         f.write(f"Sample size: {sample_size if sample_size else 'full dataset'}\n")
         f.write(f"Batch size: {BATCH_SIZE}\n")
         f.write(f"Total inference time: {total_time:.1f}s ({total_time/60:.1f}min)\n")

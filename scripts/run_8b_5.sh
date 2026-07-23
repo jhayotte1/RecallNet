@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=recallnet_8b_3
+#SBATCH --job-name=recallnet_8b_5
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:30:00
-#SBATCH --exclude=n101,n102
+#SBATCH --exclude=n51,n52,n53,n54,n55,n101,n102
 #SBATCH --output=/mnt/beegfs/projects/RecallNet/src/results/logs/slurm_%j.out
 #SBATCH --error=/mnt/beegfs/projects/RecallNet/src/results/logs/slurm_%j.err
 
@@ -22,12 +22,12 @@ OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=10 ollama serve > ~/RecallNet/ollam
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("desires" "distinct from")
+PREDS=("has a")
 
 cd /mnt/beegfs/projects/RecallNet/src/scripts
 python3 LG_classify.py \
     --data-dir top_5M_by_predicate \
-    --exp-name exp04 \
+    --exp-name exp05 \
     --exp-desc "Final scoring, first pass" \
     --predicates "${PREDS[@]}"
 

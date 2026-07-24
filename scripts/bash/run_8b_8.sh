@@ -22,7 +22,7 @@ OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=10 ollama serve > ~/RecallNet/ollam
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("has property_5" "at location_3")
+PREDS=("at location_3")
 
 cd /mnt/beegfs/projects/RecallNet/src/scripts
 python3 LG_classify_2.py \

@@ -22,12 +22,12 @@ OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=10 ollama serve > ~/RecallNet/ollam
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("part of_2")
+PREDS=("capable of_3")
 
 cd /mnt/beegfs/projects/RecallNet/src/scripts
 python3 LG_classify_2.py \
     --data-dir top_5M_by_predicate \
-    --exp-name exp7 \
+    --exp-name exp09 \
     --exp-desc "Final scoring, first pass" \
     --predicates "${PREDS[@]}"
 

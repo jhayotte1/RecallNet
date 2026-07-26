@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=recallnet_8b_8
+#SBATCH --job-name=recallnet_8b_9
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:30:00
 #SBATCH --exclude=n101,n102

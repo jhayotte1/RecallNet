@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=recallnet_8b_11
+#SBATCH --job-name=recallnet_8b_20
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:50:00
 #SBATCH --exclude=n51,n52,n53,n54,n55,n101,n102
@@ -22,7 +22,7 @@ OLLAMA_FLASH_ATTENTION=1 OLLAMA_NUM_PARALLEL=10 ollama serve > ~/RecallNet/ollam
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("at location_2")
+PREDS=("has property_1")
 
 cd /mnt/beegfs/projects/RecallNet/src/scripts
 python3 LG_classify_2.py \

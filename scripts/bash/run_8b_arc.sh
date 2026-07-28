@@ -3,7 +3,7 @@
 #SBATCH --account=sta_inf
 #SBATCH --partition=preemptable
 #SBATCH --qos=preemptable
-#SBATCH --time=12:00:00
+#SBATCH --time=13:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32G
 #SBATCH --nodelist=arcadia-slurm-node-3
@@ -17,14 +17,13 @@ source ~/.bashrc
 cd ~/RecallNet/src
 source .venv/bin/activate
 
-
-export OLLAMA_PORT=$((11434 + SLURM_JOB_ID % 1000))
-export OLLAMA_HOST=127.0.0.1:$OLLAMA_PORT
-
 export RECALLNET_MODEL="llama3.1:8b"
 export RECALLNET_BATCH_SIZE=10
 export RECALLNET_MAX_CONCURRENCY=10
 export RECALLNET_PROMPT="prompt_classify.txt"
+
+export OLLAMA_PORT=$((11434 + SLURM_JOB_ID % 1000))
+export OLLAMA_HOST=127.0.0.1:$OLLAMA_PORT
 
 export OLLAMA_FLASH_ATTENTION=1
 export OLLAMA_NUM_PARALLEL=10
@@ -35,7 +34,7 @@ ollama serve > ~/RecallNet/ollama_$SLURM_JOB_ID.log 2>&1 &
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("has property_1")
+PREDS=("at location_1")
 
 cd scripts
 

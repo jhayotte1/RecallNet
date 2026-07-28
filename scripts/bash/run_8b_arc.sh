@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=recallnet_8b_test
+#SBATCH --job-name=recallnet_8b_arc
 #SBATCH --account=sta_inf
 #SBATCH --partition=preemptable
 #SBATCH --qos=preemptable
-#SBATCH --time=01:00:00
+#SBATCH --time=12:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32G
 #SBATCH --nodelist=arcadia-slurm-node-3
@@ -35,14 +35,14 @@ ollama serve > ~/RecallNet/ollama_$SLURM_JOB_ID.log 2>&1 &
 OLLAMA_PID=$!
 sleep 10
 
-PREDS=("at location" "capable of")
+PREDS=("has property_1")
 
 cd scripts
 
-python3 LG_classify.py \
-    --data-dir sample_data_1k_top_100k \
-    --exp-name exp03 \
-    --exp-desc "Test speed H100 with higher concurrency" \
+python3 LG_classify_2.py \
+    --data-dir top_5M_by_predicate \
+    --exp-name exp00 \
+    --exp-desc "Final scoring" \
     --predicates "${PREDS[@]}"
 
 sleep 3

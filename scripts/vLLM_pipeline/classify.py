@@ -76,7 +76,7 @@ def build_classifier():
 
 def classify_batches(batches, predicate: str):
     print("Building classifier")
-    llm, sampling = build_classifier()      # charge le modele au 1er appel
+    llm, sampling = build_classifier()
     print("Building prompt")
     sys_prompt = build_prompt(predicate)
     all_messages = [build_message(format_batch(b), sys_prompt) for b in batches]
@@ -91,5 +91,5 @@ def classify_batches(batches, predicate: str):
             results.append(
                 BatchEvaluation.model_validate_json(o.outputs[0].text))
         except Exception:
-            results.append(None)            # compte en errors dans run_experiment
+            results.append(None)
     return results, start_time

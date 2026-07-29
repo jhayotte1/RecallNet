@@ -6,7 +6,7 @@
 #SBATCH --time=13:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32G
-#SBATCH --nodelist=arcadia-slurm-node-3
+#SBATCH --nodelist=arcadia-slurm-node-2
 
 #SBATCH --output=/mnt/hdd/homes/jhayotte/RecallNet/src/results/logs/slurm_%j.out
 #SBATCH --error=/mnt/hdd/homes/jhayotte/RecallNet/src/results/logs/slurm_%j.err

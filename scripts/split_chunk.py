@@ -1,22 +1,119 @@
 import pandas as pd
 from pathlib import Path
 
-CHUNK_SIZE = 280000
+from loading_dataset import load_quasimodo, load_ascent
 
-DATA_DIR = Path(__file__).parent.parent / "data" / "top_5M_by_predicate"  
-PRED_TO_CHUNK = ["hasproperty", "partof", "atlocation", "capableof"]
+DATA_DIR = Path(__file__).parent.parent / "data"
+OUT_DIR = DATA_DIR / "quasimodo_chunked"
+
+TOP_N_ALREADY_DONE = 5_000_000
+CHUNK_SIZE = 400_000
+TRIPLE_COLS = ["subject", "predicate", "object"]
+
+
+CONCEPTNET_PREDICATES = {
+    "at location", "capable of", "causes", "cause desire",
+    "created by", "defined as", "desires", "distinct from",
+    "has a", "has subevent", "has first subevent", "has last subevent",
+    "has prerequisite", "has property", "made of", "manner of",
+    "motivated by goal", "part of", "receives action", "used for",
+}
+
+
+def parse_predicate(pred: str) -> str:
+    return pred.strip().lower().replace(" ", "")
+
+
+def normalize(df: pd.DataFrame) -> pd.DataFrame:
+    for col in TRIPLE_COLS:
+        df[col] = df[col].str.strip().str.lower()
+    return df
+
+
+def chunk_quasimodo():
+    df = load_quasimodo()
+    print(f"Total: {len(df)} rows")
+
+    df_remaining = df.iloc[TOP_N_ALREADY_DONE:]
+    print(f"After skipping top {TOP_N_ALREADY_DONE}: {len(df_remaining)} rows")
+    del df
+
+    skipped = {}
+    for pred, group in df_remaining.groupby("predicate"):
+        if pred not in CONCEPTNET_PREDICATES:
+            skipped[pred] = len(group)
+            continue
+
+        pred_parsed = parse_predicate(pred)
+        pred_dir = OUT_DIR / pred_parsed
+        pred_dir.mkdir(parents=True, exist_ok=True)
+
+        n_chunks = (len(group) + CHUNK_SIZE - 1) // CHUNK_SIZE
+
+        for i, start in enumerate(range(0, len(group), CHUNK_SIZE), 1):
+            chunk = group.iloc[start:start + CHUNK_SIZE]
+            out_path = pred_dir / f"quasi_{pred_parsed}_{i}.csv"
+            chunk.to_csv(out_path, index=False)
+            print(f"  {out_path.name}: {len(chunk)} rows")
+
+        print(f"{pred} -> {pred_parsed}/: {len(group)} rows, {n_chunks} chunks\n")
+
+    if skipped:
+        print(f"\n=== Skipped {len(skipped)} non-ConceptNet predicates ===")
+        for pred, count in sorted(skipped.items(), key=lambda x: -x[1]):
+            print(f"  {pred}: {count} rows")
+        print(f"Total skipped: {sum(skipped.values())} rows")
+
+    print("\nDone")
+
+
+def chunk_ascent():
+    df_quasi = normalize(load_quasimodo())
+    print(f"Quasimodo: {len(df_quasi)} rows")
+ 
+    quasi_keys = set(df_quasi[TRIPLE_COLS].itertuples(index=False, name=None))
+    del df_quasi
+    print(f"Quasimodo unique triples: {len(quasi_keys)}")
+ 
+    print("\nLoading Ascent...")
+    df_ascent = normalize(load_ascent())
+    print(f"Ascent: {len(df_ascent)} rows")
+ 
+    before = len(df_ascent)
+    mask = df_ascent[TRIPLE_COLS].apply(tuple, axis=1).isin(quasi_keys)
+    df_ascent = df_ascent[~mask]
+    del quasi_keys, mask
+    print(f"Removed {before - len(df_ascent)} overlapping triples")
+    print(f"Ascent after dedup: {len(df_ascent)} rows")
+ 
+    skipped = {}
+    for pred, group in df_ascent.groupby("predicate"):
+        if pred not in CONCEPTNET_PREDICATES:
+            skipped[pred] = len(group)
+            continue
+ 
+        pred_parsed = parse_predicate(pred)
+        pred_dir = OUT_DIR / pred_parsed
+        pred_dir.mkdir(parents=True, exist_ok=True)
+ 
+        n_chunks = (len(group) + CHUNK_SIZE - 1) // CHUNK_SIZE
+ 
+        for i, start in enumerate(range(0, len(group), CHUNK_SIZE), 1):
+            chunk = group.iloc[start:start + CHUNK_SIZE]
+            out_path = pred_dir / f"ascent_{pred_parsed}_{i}.csv"
+            chunk.to_csv(out_path, index=False)
+            print(f"  {out_path.name}: {len(chunk)} rows")
+ 
+        print(f"{pred} -> {pred_parsed}/: {len(group)} rows, {n_chunks} chunks\n")
+ 
+    if skipped:
+        print(f"\n=== Skipped {len(skipped)} non-ConceptNet predicates ===")
+        for pred, count in sorted(skipped.items(), key=lambda x: -x[1]):
+            print(f"  {pred}: {count} rows")
+        print(f"Total skipped: {sum(skipped.values())} rows")
+ 
+    print("\nDone")
+
 
 if __name__=="__main__":
-    for pred in sorted(PRED_TO_CHUNK):
-        print(f"Chunk for {pred}")
-        df = pd.read_csv(f"{DATA_DIR}/quasi_top5000000_{pred}.csv")
-        
-        n_chunks = (len(df) + CHUNK_SIZE - 1) // CHUNK_SIZE
-        
-        for i, start in enumerate(range(0, len(df), CHUNK_SIZE), 1):
-            chunk = df.iloc[start:start + CHUNK_SIZE]
-            out = DATA_DIR / f"quasi_top5000000_{pred}_{i}.csv"
-            chunk.to_csv(out, index=False)
-            print(f"  {out.name}: {len(chunk)} rows")
-        
-        print(f"{pred}: {len(df)} rows -> {n_chunks} chunks")
+    chunk_quasimodo()

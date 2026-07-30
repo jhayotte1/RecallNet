@@ -8,7 +8,7 @@ from .output import BatchEvaluation
 from .batching import format_batch
 from .config import (
     SYSTEM_PROMPT_PATH, PREDICATE_REG_PATH, TEMPERATURE,
-    VLLM_MODEL, QUANTIZATION, GPU_UTIL, MAX_MODEL_LEN, MAX_TOKENS,
+    VLLM_MODEL, QUANTIZATION, GPU_UTIL, MAX_MODEL_LEN, MAX_TOKENS, MAX_NUM_BATCHED_TOKENS, MAX_NUM_SEQS
 )
 
 SYSTEM_PROMPT = SYSTEM_PROMPT_PATH.read_text()
@@ -64,6 +64,8 @@ def build_classifier():
             quantization=QUANTIZATION,
             gpu_memory_utilization=GPU_UTIL,
             max_model_len=MAX_MODEL_LEN,
+            max_num_batched_tokens=MAX_NUM_BATCHED_TOKENS,
+            max_num_seqs=MAX_NUM_SEQS,
         )
         _SAMPLING = SamplingParams(
             temperature=TEMPERATURE,

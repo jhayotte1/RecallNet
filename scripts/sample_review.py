@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+import json
 
 
 # Predicates to skip (not actual predicate folders)
@@ -36,7 +37,7 @@ def sample_triples(df: pd.DataFrame, n=SAMPLE_SIZE, seed=RANDOM_STATE) -> pd.Dat
     return sampled
 
 
-def main():
+def sampling_scored_data():
     pred_dirs = sorted([
         d for d in DATA_DIR.iterdir()
         if d.is_dir() and d.name not in SKIP_DIRS
@@ -59,5 +60,39 @@ def main():
         sampled[["subject", "predicate", "object"]].to_csv(output_to / f"sampled_{pred}_to.csv", index=False)
         print(f"Saved at {output}")
 
+def convert_json_review_to_csv():
+    samp_dir = DATA_DIR / "01_Sampling" / "ws"
+    in_dir = DATA_DIR / "02_Review" / "json"
+    out_dir = DATA_DIR / "02_Review" / "csvs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    jsons = in_dir.glob("*.json")
+    for jsn in jsons:
+        pred = jsn.stem
+        with open(jsn) as f:
+            rev_df = pd.DataFrame(json.load(f))
+        rev_df.rename(columns={"reasoning": "r_reason"}, inplace=True)
+
+        ws_df = pd.read_csv(samp_dir / f"sampled_{pred}.csv")
+        ws_df.rename(columns={"reason": "s_reason"}, inplace=True)
+
+        merged = ws_df.merge(
+            rev_df[["subject", "object", "verdict", "r_reason"]],
+            on=["subject", "object"],
+            how="left"
+        )
+
+        col_order = [
+            "subject", "predicate", "object", "meaningfulness", "typicality", "saliency", "verdict", "source_file" 
+        ]
+        merged = merged[col_order]
+        merged.to_csv(out_dir / f"rev_{pred}.csv", index=False)
+
+def concat_rev():
+    in_dir = DATA_DIR / "02_Review" / "csvs"
+    out_dir = DATA_DIR / "02_Review"
+    dfs = [pd.read_csv(f) for f in in_dir.glob("rev_*.csv")]
+    combined = pd.concat(dfs, ignore_index=True)
+    combined.to_csv(out_dir / "rev_data.csv", index=False)
+
 if __name__ == "__main__":
-    main()
+    concat_rev()

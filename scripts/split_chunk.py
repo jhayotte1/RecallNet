@@ -4,7 +4,7 @@ from pathlib import Path
 from loading_dataset import load_quasimodo, load_ascent
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-OUT_DIR = DATA_DIR / "ascent_chunked"
+OUT_DIR = DATA_DIR / "quasi_overlap_cn"
 
 TOP_N_ALREADY_DONE = 5_000_000
 CHUNK_SIZE = 400_000
@@ -116,6 +116,36 @@ def chunk_ascent():
 
     print("\nDone")
 
+def chunk_overlap_quasi_cn():
+    print("Loading data")
+    df_ov = pd.read_csv(DATA_DIR / "quasi_overlap_cn.csv")
+    skipped = {}
+    for pred, group in df_ov.groupby("predicate"):
+        if pred not in CONCEPTNET_PREDICATES:
+            skipped[pred] = len(group)
+            continue
+        pred_parsed = parse_predicate(pred)
+        pred_dir = OUT_DIR / pred_parsed
+        pred_dir.mkdir(parents=True, exist_ok=True)
+
+        n_chunks = (len(group) + CHUNK_SIZE - 1) // CHUNK_SIZE
+
+        for i, start in enumerate(range(0, len(group), CHUNK_SIZE), 1):
+            chunk = group.iloc[start:start + CHUNK_SIZE]
+            out_path = pred_dir / f"quasi_{pred_parsed}_{i}.csv"
+            chunk.to_csv(out_path, index=False)
+            print(f"  {out_path.name}: {len(chunk)} rows")
+
+        print(f"{pred} -> {pred_parsed}/: {len(group)} rows, {n_chunks} chunks\n")
+
+    if skipped:
+        print(f"\n=== Skipped {len(skipped)} non-ConceptNet predicates ===")
+        for pred, count in sorted(skipped.items(), key=lambda x: -x[1]):
+            print(f"  {pred}: {count} rows")
+        print(f"Total skipped: {sum(skipped.values())} rows")
+
+    print("\nDone")
+
 
 if __name__=="__main__":
-    chunk_ascent()
+    chunk_overlap_quasi_cn()

@@ -9,7 +9,7 @@ from pathlib import Path
 DATA_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8/q_final_process/02_Review").expanduser()
 
 def train_logreg():
-    df = pd.read_csv(DATA_DIR / "rev_data.csv")
+    df = pd.read_csv(DATA_DIR / "rev_data_wcn.csv")
 
     df["label"] = (df["verdict"] == "KEEP").astype(int)
 

@@ -6,6 +6,7 @@ import json
 # Predicates to skip (not actual predicate folders)
 SKIP_DIRS = {"00_LOGS"}
 DATA_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8/q_final_process").expanduser()
+CN_DATA = Path("~/RecallNet/src/results/llama3.1:8b-fp8/process_overlap_quasi_cn").expanduser()
 OUTDIR = "00_sampling"
 SAMPLE_SIZE = 100
 RANDOM_STATE = 42
@@ -94,5 +95,37 @@ def concat_rev():
     combined = pd.concat(dfs, ignore_index=True)
     combined.to_csv(out_dir / "rev_data.csv", index=False)
 
+def count_rev():
+    in_dir = DATA_DIR / "02_Review"
+    df = pd.read_csv(in_dir / "rev_data_wcn.csv")
+    print(df["verdict"].value_counts())
+
+def concat_cn_scored():
+    pred_dirs = sorted([
+        d for d in CN_DATA.iterdir()
+    ])
+    dfs = []
+    for pred_dir in pred_dirs:
+        pred = pred_dir.stem
+        df = pd.read_csv(pred_dir / f"qp_{pred}_1.csv")
+        df["source_file"] = f"ov_cn_{pred}.csv"
+        dfs.append(df)
+    combined = pd.concat(dfs, ignore_index=True)
+    combined["verdict"] = "KEEP"
+    col_list = [
+        "subject", "predicate", "object",
+        "meaningfulness", "typicality", "saliency",
+        "verdict", "source_file",
+    ]
+    combined = combined[col_list]
+    combined.to_csv(CN_DATA / "rev_cn_ov.csv", index=False)
+
+def add_cn_triple_to_rev_data():
+    df_cn = pd.read_csv(CN_DATA / "rev_cn_ov.csv")
+    df_rev = pd.read_csv(DATA_DIR / "02_Review" / "rev_data.csv")
+    df_cn_sample = df_cn.sample(n=800, random_state=RANDOM_STATE)
+    combined = pd.concat([df_rev, df_cn_sample], ignore_index=True)
+    combined.to_csv(DATA_DIR / "02_Review" / "rev_data_wcn.csv")
+
 if __name__ == "__main__":
-    concat_rev()
+    count_rev()

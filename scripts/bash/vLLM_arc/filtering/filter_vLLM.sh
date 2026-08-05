@@ -25,7 +25,7 @@ export RECALLNET_VLLM_MAX_LEN=4096
 
 cd ~/RecallNet/src/scripts
 
-uv run vLLM_classify_2.py \
+uv run vLLM_filtering.py \
     --dataset-prefix q \
     --predicates "causes"
 

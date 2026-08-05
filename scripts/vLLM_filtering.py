@@ -7,12 +7,12 @@ import traceback
 from pathlib import Path
 
 from vLLM_pipeline.batching import make_batches
-from vLLM_pipeline.classify import classify_batches
-from vLLM_pipeline.classify import build_prompt
+from vLLM_pipeline.filtering import classify_batches
+from vLLM_pipeline.filtering import build_prompt
 from vLLM_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-INPUT_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8")
+INPUT_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8").expanduser()
 
 PREDICATE_LIST = [
         "at location",

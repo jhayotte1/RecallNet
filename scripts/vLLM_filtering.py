@@ -60,6 +60,7 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
 
     rows = []
     errors = 0
+    row_idx = 0
     for batch, result in zip(batches, results):
         if result is None:
             errors += len(batch)
@@ -70,13 +71,19 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
         if len(sorted_evals) == len(batch):
             for i, (_, evaluation) in enumerate(sorted_evals):
                 s, p, o = batch[i]
+                orig = df.iloc[row_idx + i]
                 rows.append({
                     "subject": s,
                     "predicate": p,
                     "object": o,
-                    "reasoning": evaluation.reasoning,
+                    "meaningfulness": orig["meaningfulness"],
+                    "typicality": orig["typicality"],
+                    "saliency": orig["saliency"],
                     "decision": evaluation.decision,
+                    "s_reason": orig["reason"],
+                    "d_reason": evaluation.reasoning,
                 })
+
         else:
             for idx_str, evaluation in result.filterdecision.items():
                 idx = int(idx_str)
@@ -85,14 +92,20 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
                     errors += 1
                     continue
                 s, p, o = batch[idx]
+                orig = df.iloc[row_idx + idx]
                 rows.append({
                     "subject": s,
                     "predicate": p,
                     "object": o,
-                    "reasoning": evaluation.reasoning,
+                    "meaningfulness": orig["meaningfulness"],
+                    "typicality": orig["typicality"],
+                    "saliency": orig["saliency"],
                     "decision": evaluation.decision,
+                    "s_reason": orig["reason"],
+                    "d_reason": evaluation.reasoning,
                 })
-
+        row_idx += len(batch)
+        
     out_df = pd.DataFrame(rows)
 
     out_dir = res_dir / pred_parsed
@@ -159,7 +172,7 @@ if __name__ == "__main__":
             df.columns = df.columns.str.strip()
 
             try:
-                run_chunk(df, pred=pred, pred_parsed=pred_parsed, chunk_num=chunk_num, dataset_prefix=dp, res_dir=result_dir)
+                run_chunk(df, pred=pred, pred_parsed=pred_parsed, chunk_num=chunk_num, dataset_prefix=dp, res_dir=output_dir)
             except Exception as e:
                 print(f"  Error on chunk {chunk_num} of '{pred}': {e}")
                 traceback.print_exc()

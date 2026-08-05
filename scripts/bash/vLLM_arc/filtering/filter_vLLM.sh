@@ -22,6 +22,7 @@ export PYTHONUNBUFFERED=1
 export RECALLNET_VLLM_MODEL="/mnt/ssd/recallnet/models/Meta-Llama-3.3-70B-Instruct"
 export RECALLNET_MODEL_LIGHT="llama3.3:70b-fp8"
 export RECALLNET_VLLM_MAX_LEN=4096
+export RECALLNET_PROMPT="prompt_filter.txt"
 
 cd ~/RecallNet/src/scripts
 

@@ -30,4 +30,4 @@ Act as a strict critic. Look for ANY of the following disqualifying issue:
 
 ##OUTPUT STRUCTURE
 You must respond with a JSON object only
-{{"filterdecision": {{"0": {{"reasoning": "Brief justification", "verdict": "KEEP"}}, "1": {{"reasoning": "...", "verdict": "MODIFY"}}}}}}
+{{"filterdecision": {{"0": {{"reasoning": "Brief justification", "decision": "KEEP"}}, "1": {{"reasoning": "...", "decision": "MODIFY"}}}}}}

@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=rcn_filt_vLLM
+#SBATCH --job-name=rcn_filt_vLLM_1
 #SBATCH --account=sta_inf
 #SBATCH --partition=preemptable
 #SBATCH --qos=preemptable
-#SBATCH --nodelist=darkshadow-slurm-node-2
-#SBATCH --time=10:00:00
+#SBATCH --nodelist=darkshadow-slurm-node-1
+#SBATCH --time=18:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=40G
+#SBATCH --mem=45G
 #SBATCH --output=/mnt/hdd/homes/jhayotte/RecallNet/src/results/logs/scoring_%j.out
 #SBATCH --error=/mnt/hdd/homes/jhayotte/RecallNet/src/results/logs/scoring_%j_vLLM.err
 
@@ -28,5 +28,5 @@ cd ~/RecallNet/src/scripts
 
 uv run vLLM_filtering.py \
     --dataset-prefix q \
-    --predicates "causes"
+    --predicates "at location" "capable of" "created by" "defined as" "desires" "distinct from" "has a"
 

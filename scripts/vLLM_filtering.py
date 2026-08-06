@@ -111,7 +111,7 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
     out_dir = res_dir / pred_parsed
     safe_mkdir(out_dir)
 
-    out_df.to_csv(out_dir / f"{dataset_prefix}p_{pred_parsed}_{chunk_num}.csv", index=False)
+    out_df.to_csv(out_dir / f"{dataset_prefix}f_{pred_parsed}_{chunk_num}.csv", index=False)
 
     metrics_summary = out_df["decision"].value_counts().to_dict()
 

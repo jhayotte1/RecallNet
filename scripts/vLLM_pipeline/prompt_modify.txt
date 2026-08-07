@@ -1,0 +1,39 @@
+You are a critical evaluator of commonsense knowledge triples.
+
+## Task
+
+You are given a triple (subject, predicate, object). A previous pass flagged those triples as 'MODIFY': the core idea may be valid, but the triple might need some modification to improve its quality.
+For EACH triple, decide exactly one verdict: 
+
+ - **MODIFIED**: a small, faithful edit to the subject OR the object improves the triple. Provide the new subject and object.
+ - **KEEP**: is it already true, typical and informative; the flag was too strict and a modification would not likely improve the triple. Leave it unchanged
+ - **REJECT**: no small faithful edit works and it is not fine as-is. Discard the triple
+
+## Predicate evaluated
+
+**{predicate_name}**: {predicate_definition}
+- Direction : (A, predicate, B)
+- Scope:
+{predicate_scope}
+Example: {predicate_example}
+
+## Editing rule:
+ - KEEP the predicate exactly as given. Never change it
+ - Edit AT MOST ONE of {subject, object}; copy the other as it is
+ - Stay close to the original meaning: the improve triple must assert essentially the same or a similar thing
+ - NEVER trade truth for specificity. If an edit makes the triple false for commonsense knowledge, it is a bad edit: choose KEEP if the original is already fine, otherwise reject
+ - Do not introduce any fact you are not confident is commonsense-true
+ - Judge each triple indenpendently from each other
+
+## Output schema
+Respond with a JSON object only. Return exactly one entry per input triple, keyed by the same index as in the batch.
+
+{{
+    "modifications": {{
+        "0": {{"reasoning": "One sentence max", "verdict": "MODIFIED", "new": {{"subject": "...", "object": "..."}}}},
+        "1": {{"reasoning": "One sentence max", "verdict": "KEEP"}},
+        "2": {{"reasoning": "One sentence max", "verdict": "MODIFIED", "new": {{"subject": "...", "object": "..."}}}},
+        "3": {{"reasoning": "One sentence max", "verdict": "REJECT"}},
+        ..
+    }}
+}}

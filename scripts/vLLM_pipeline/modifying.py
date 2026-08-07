@@ -17,6 +17,17 @@ with open(PREDICATE_REG_PATH, "r") as f:
     PREDICATE_REG = json.load(f)
 
 
+def format_scoring_examples(scoring_examples: list) -> str:
+    lines = ["## Scoring examples for this predicate\n"]
+    for i, ex in enumerate(scoring_examples):
+        lines.append(f"**Example {i+1}**: {ex['triple']}")
+        lines.append(f"- Meaningfulness: {ex['meaningfulness']}")
+        lines.append(f"- Typicality: {ex['typicality']}")
+        lines.append(f"- Saliency: {ex['saliency']}")
+        lines.append(f"- Reasoning: {ex['reasoning']}\n")
+    return "\n".join(lines)
+
+
 def build_prompt(predicate: str):
     pred_dic = PREDICATE_REG[predicate]
     return SYSTEM_PROMPT.format(

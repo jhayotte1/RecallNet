@@ -103,7 +103,7 @@ def split_kmr_global():
         f.write(f"Model used for filtering : 'llama3.3:70b-fp8\n\n")
         f.write(f"Totals:\n")
         f.write(f"  KEEP:       {total_keep:>6} ({total_keep/total_all*100:.1f}%)\n")
-        f.write(f"  IN_BETWEEN: {total_between:>6} ({total_between/total_all*100:.1f}%)\n")
+        f.write(f"  MODIFY: {total_between:>6} ({total_between/total_all*100:.1f}%)\n")
         f.write(f"  REJECT:     {total_reject:>6} ({total_reject/total_all*100:.1f}%)\n")
         f.write(f"  TOTAL:      {total_all:>6}\n\n")
         f.write(df_stats_tot.to_string(index=False))

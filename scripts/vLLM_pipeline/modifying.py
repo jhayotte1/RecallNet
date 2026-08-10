@@ -4,7 +4,7 @@ import time
 from vllm import LLM, SamplingParams
 from vllm.sampling_params import StructuredOutputsParams
 
-from .output import BatchFilterDecision
+from .output import BatchModification
 from .batching import format_batch
 from .config import (
     SYSTEM_PROMPT_PATH, PREDICATE_REG_PATH, TEMPERATURE,
@@ -15,17 +15,6 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_PATH.read_text()
 
 with open(PREDICATE_REG_PATH, "r") as f:
     PREDICATE_REG = json.load(f)
-
-
-def format_scoring_examples(scoring_examples: list) -> str:
-    lines = ["## Scoring examples for this predicate\n"]
-    for i, ex in enumerate(scoring_examples):
-        lines.append(f"**Example {i+1}**: {ex['triple']}")
-        lines.append(f"- Meaningfulness: {ex['meaningfulness']}")
-        lines.append(f"- Typicality: {ex['typicality']}")
-        lines.append(f"- Saliency: {ex['saliency']}")
-        lines.append(f"- Reasoning: {ex['reasoning']}\n")
-    return "\n".join(lines)
 
 
 def build_prompt(predicate: str):

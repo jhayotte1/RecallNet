@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, Optional
 from typing import Literal
 
 
@@ -28,3 +28,16 @@ class TripleFilterDecision(BaseModel):
 
 class BatchFilterDecision(BaseModel):
     filterdecision: dict[str, TripleFilterDecision]
+
+#Third Pass : Modifying
+class Edit(BaseModel):
+    subject: str
+    object: str
+
+class TripleEdit(BaseModel):
+    reasoning: str
+    verdict: Literal["MODIFIED", "KEEP", "REJECT"]
+    new: Optional[Edit] = None
+
+class BatchModification(BaseModel):
+    modifications: dict[str, TripleEdit]

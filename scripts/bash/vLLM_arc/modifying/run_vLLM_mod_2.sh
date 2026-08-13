@@ -3,7 +3,7 @@
 #SBATCH --account=sta_inf
 #SBATCH --partition=preemptable
 #SBATCH --qos=preemptable
-#SBATCH --nodelist=darkshadow-slurm-node-2
+#SBATCH --nodelist=darkshadow-slurm-node-1
 #SBATCH --time=10:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=4
@@ -28,5 +28,5 @@ cd ~/RecallNet/src/scripts
 
 uv run vLLM_classify_2.py \
     --dataset-prefix q \
-    --predicates "at location" "capable of" "causes" "created by" "defined as" "desires" "distinct from" "has a"
+    --predicates "has first subevent" "has prerequisite" "has property" "has subevent" "made of" "manner of" "motivated by goal" "part of" "receives action" "used for"
 

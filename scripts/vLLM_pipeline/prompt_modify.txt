@@ -19,7 +19,7 @@ Example: {predicate_example}
 
 ## Editing rule:
  - KEEP the predicate exactly as given. Never change it
- - Edit AT MOST ONE of {subject, object}; copy the other as it is
+ - Edit AT MOST ONE of {{subject, object}}; copy the other as it is
  - Stay close to the original meaning: the improve triple must assert essentially the same or a similar thing
  - NEVER trade truth for specificity. If an edit makes the triple false for commonsense knowledge, it is a bad edit: choose KEEP if the original is already fine, otherwise reject
  - Do not introduce any fact you are not confident is commonsense-true

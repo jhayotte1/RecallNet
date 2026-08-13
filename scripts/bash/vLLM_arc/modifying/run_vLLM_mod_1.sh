@@ -26,7 +26,7 @@ export RECALLNET_PROMPT="prompt_modify.txt"
 
 cd ~/RecallNet/src/scripts
 
-uv run vLLM_classify_2.py \
+uv run vLLM_modifying.py \
     --dataset-prefix q \
     --predicates "at location" "capable of" "causes" "created by" "defined as" "desires" "distinct from" "has a"
 

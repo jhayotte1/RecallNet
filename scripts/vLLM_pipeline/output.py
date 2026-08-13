@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, Optional
-from typing import Literal
+from pydantic import BaseModel, Field
+from typing import Literal, Optional
 
 
 class TripleEvaluation(BaseModel):

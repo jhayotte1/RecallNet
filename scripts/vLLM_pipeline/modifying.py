@@ -54,7 +54,7 @@ def build_classifier():
             temperature=TEMPERATURE,
             max_tokens=MAX_TOKENS,
             structured_outputs=StructuredOutputsParams(
-                json=BatchFilterDecision.model_json_schema()),
+                json=BatchModification.model_json_schema()),
         )
     return _LLM, _SAMPLING
 
@@ -74,7 +74,7 @@ def classify_batches(batches, predicate: str):
     for o in outputs:
         try:
             results.append(
-                BatchFilterDecision.model_validate_json(o.outputs[0].text))
+                BatchModification.model_validate_json(o.outputs[0].text))
         except Exception:
             results.append(None)
     return results, start_time

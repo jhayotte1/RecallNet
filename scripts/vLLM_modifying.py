@@ -38,7 +38,7 @@ PREDICATE_LIST = [
     ]
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="RecallNet scoring pipeline (vLLM)")
+    parser = argparse.ArgumentParser(description="RecallNet modifying triple pipeline (vLLM)")
     parser.add_argument("--dataset-prefix", type=str, default="q", help="Prefix for output files (q=quasimodo, a=ascent)")
     parser.add_argument("--predicates", nargs="+", default=PREDICATE_LIST, help="Predicates to process")
     return parser.parse_args()

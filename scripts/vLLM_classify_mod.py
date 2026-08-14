@@ -12,7 +12,6 @@ from vLLM_pipeline.classify import build_prompt
 from vLLM_pipeline.config import BATCH_SIZE, SYSTEM_PROMPT_PATH, MODEL_NAME_LIGHT
 
 SYSTEM_PROMPT = Path(SYSTEM_PROMPT_PATH).read_text()
-DATA_DIR  = Path(__file__).parent.parent / "data"
 RESULT_DIR = Path(__file__).parent.parent / "results" / MODEL_NAME_LIGHT
 
 PREDICATE_LIST = [
@@ -39,11 +38,9 @@ PREDICATE_LIST = [
     ]
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="RecallNet scoring pipeline (vLLM)")
-    parser.add_argument("--data-dir", type=str, required=True, help="Data directory name (e.g. quasimodo_chunked)")
+    parser = argparse.ArgumentParser(description="RecallNet rescoring pipeline (vLLM) — modified triples")
     parser.add_argument("--dataset-prefix", type=str, default="q", help="Prefix for output files (q=quasimodo, a=ascent)")
     parser.add_argument("--predicates", nargs="+", default=PREDICATE_LIST, help="Predicates to process")
-    parser.add_argument("--fp-num", type=int, default=0, help="Dir number for ffinal_process")
     return parser.parse_args()
 
 def safe_mkdir(path: Path):
@@ -105,7 +102,7 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
     out_dir = res_dir / pred_parsed
     safe_mkdir(out_dir)
 
-    out_df.to_csv(out_dir / f"{dataset_prefix}p_{pred_parsed}_{chunk_num}.csv", index=False)
+    out_df.to_csv(out_dir / f"{dataset_prefix}rp_{pred_parsed}_{chunk_num}.csv", index=False)
 
     metrics_summary = {}
     for metric in ["meaningfulness", "typicality", "saliency"]:
@@ -116,7 +113,7 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
 
     formatted_prompt = build_prompt(pred)
 
-    with open(out_dir / f"{dataset_prefix}c_{pred_parsed}_{chunk_num}.txt", "w") as f:
+    with open(out_dir / f"{dataset_prefix}rc_{pred_parsed}_{chunk_num}.txt", "w") as f:
         f.write(f"Model: {MODEL_NAME_LIGHT}\n")
         f.write(f"Predicate: {pred}\n")
         f.write(f"Chunk: {chunk_num}\n")
@@ -132,17 +129,18 @@ def run_chunk(df: pd.DataFrame, pred: str, pred_parsed: str, chunk_num: int, dat
         f.write(f"\n{'='*50}\n")
         f.write(f"PROMPT:\n\n{formatted_prompt}\n")
 
-    print(f"  -> {dataset_prefix}p_{pred_parsed}_{chunk_num}.csv | {len(df)} triples | {total_time:.1f}s | {avg_time*1000:.2f}ms/triple | {errors} errors")
+    print(f"  -> {dataset_prefix}rp_{pred_parsed}_{chunk_num}.csv | {len(df)} triples | {total_time:.1f}s | {avg_time*1000:.2f}ms/triple | {errors} errors")
 
     return out_df
 
 
 if __name__ == "__main__":
     args = parse_args()
-    data_dir = DATA_DIR / args.data_dir
     dp = args.dataset_prefix
-    fp_num = args.fp_num
-    result_dir = Path(RESULT_DIR, f"final_process_{fp_num}")
+    base_dir = RESULT_DIR / f"{dp}_final_process"
+    data_dir = base_dir / "05_MODIFIED" / "MODIFIED"
+    result_dir = base_dir / "06_RESCORING"
+    result_dir.mkdir(parents=True, exist_ok=True)
 
     for pred in args.predicates:
         pred_parsed = pred.strip().replace(" ", "").lower()
@@ -152,7 +150,7 @@ if __name__ == "__main__":
             print(f"No directory for '{pred}' at {pred_dir}, skipping")
             continue
 
-        chunk_files = sorted(pred_dir.glob(f"*_{pred_parsed}_*.csv"))
+        chunk_files = sorted(pred_dir.glob(f"{dp}mm_{pred_parsed}_*.csv"))
         if not chunk_files:
             print(f"No chunk files for '{pred}' in {pred_dir}, skipping")
             continue
@@ -162,7 +160,7 @@ if __name__ == "__main__":
         for chunk_file in chunk_files:
             chunk_num = int(re.search(r"_(\d+)\.csv$", chunk_file.name).group(1))
 
-            result_file = result_dir / pred_parsed / f"{dp}p_{pred_parsed}_{chunk_num}.csv"
+            result_file = result_dir / pred_parsed / f"{dp}rp_{pred_parsed}_{chunk_num}.csv"
             if result_file.exists():
                 print(f"  Skipping chunk {chunk_num}, already done ({result_file.name})")
                 continue

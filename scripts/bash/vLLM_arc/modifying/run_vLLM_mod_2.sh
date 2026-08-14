@@ -27,6 +27,6 @@ export RECALLNET_PROMPT="prompt_modify.txt"
 cd ~/RecallNet/src/scripts
 
 uv run vLLM_modifying.py \
-    --dataset-prefix q \
-    --predicates "has first subevent" "has prerequisite" "has property" "has subevent" "made of" "manner of" "motivated by goal" "part of" "receives action" "used for"
+    --dataset-prefix a \
+    --predicates "has first subevent" "has last subevent" "has prerequisite" "has property" "has subevent" "manner of" "motivated by goal" "part of" "receives action" "used for"
 

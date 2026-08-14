@@ -9,7 +9,14 @@ RES_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8").expanduser()
 def arg_parser():
     parser = ArgumentParser()
     parser.add_argument("--dataset-prefix", type=str, required=True, help="Prefix dataset to be processed. q: Quasimodo ; a: Ascent")
+    parser.add_argument("--mod", action="store_true", help="Split the rescored filtering in 06_RESCORING/04_Filtering instead of the initial 04_Filtering")
     return parser.parse_args()
+
+def get_input_dir(dp: str, mod: bool) -> Path:
+    base_dir = RES_DIR / f"{dp}_final_process"
+    if mod:
+        return base_dir / "06_RESCORING" / "04_Filtering"
+    return base_dir / "04_Filtering"
 
 def split_kmr_df(df: pd.DataFrame):
     keep = df[df["decision"]=="KEEP"]
@@ -20,7 +27,7 @@ def split_kmr_df(df: pd.DataFrame):
 def split_kmr_global():
     args = arg_parser()
     dp = args.dataset_prefix
-    input_dir = RES_DIR / f"{dp}_final_process" / "04_Filtering"
+    input_dir = get_input_dir(dp, args.mod)
     config_dir = input_dir / "0_config"
     keep_dir = input_dir / "KEEP"
     mod_dir = input_dir / "MODIFY"
@@ -69,10 +76,12 @@ def split_kmr_global():
                 "keep": tot_keep,
                 "modify": tot_mod,
                 "reject": tot_rej,
-                "keep%": f"{tot_keep/tot*100:.1f}",
-                "modify%": f"{tot_mod/tot*100:.1f}",
-                "reject%": f"{tot_rej/tot*100:.1f}",
+                "keep%": f"{tot_keep/tot*100:.1f}" if tot else "0.0",
+                "modify%": f"{tot_mod/tot*100:.1f}" if tot else "0.0",
+                "reject%": f"{tot_rej/tot*100:.1f}" if tot else "0.0",
             })
+        if not stats_pred:
+            continue
         df_stats_pred = pd.DataFrame(stats_pred)
         df_stats_pred.to_csv(stats_dir_pred / f"s_{pred}.csv", index=False)
         pred_total = df_stats_pred["total"].sum()
@@ -85,9 +94,9 @@ def split_kmr_global():
             "keep": pred_keep,
             "modify": pred_mod,
             "reject": pred_rej,
-            "keep%": f"{pred_keep/pred_total*100:.1f}",
-            "modify%": f"{pred_mod/pred_total*100:.1f}",
-            "reject%": f"{pred_rej/pred_total*100:.1f}",
+            "keep%": f"{pred_keep/pred_total*100:.1f}" if pred_total else "0.0",
+            "modify%": f"{pred_mod/pred_total*100:.1f}" if pred_total else "0.0",
+            "reject%": f"{pred_rej/pred_total*100:.1f}" if pred_total else "0.0",
         })
     df_stats_tot = pd.DataFrame(stats)
     df_stats_tot.to_csv(stats_dir / "filtering_summary.csv", index=False)
@@ -112,7 +121,7 @@ def split_kmr_global():
 def remove_old():
     args = arg_parser()
     dp = args.dataset_prefix
-    input_dir = RES_DIR / f"{dp}_final_process" / "04_Filtering"
+    input_dir = get_input_dir(dp, args.mod)
     EXCLUDE = {"KEEP", "MODIFY", "REJECT", "0_stats", "0_config", "0_LOGS"}
     pred_dirs = [
         p for p in sorted(input_dir.glob("*"))

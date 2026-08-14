@@ -1,9 +1,9 @@
 import pandas as pd
 from fnmatch import fnmatch
 from pathlib import Path
+from argparse import ArgumentParser
 
-INPUT_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8/a_final_process").expanduser()
-OUTPUT_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8/a_final_process/03_Splitting").expanduser()
+RES_DIR = Path("~/RecallNet/src/results/llama3.1:8b-fp8").expanduser()
 
 KEEP = {
     "m_min": 4, "m_max": 5,
@@ -15,6 +15,12 @@ IN_BETWEEN = {
     "t_min": 3, "t_max": 5,
     "s_min": 1, "s_max": 3,
 }
+
+def arg_parser():
+    parser = ArgumentParser()
+    parser.add_argument("--dataset-prefix", type=str, required=True, help="q: Quasimodo ; a: Ascent")
+    parser.add_argument("--mod", action="store_true", help="Split rescored (modified) triples from 06_RESCORING instead of the initial scoring")
+    return parser.parse_args()
 
 def matches_rule(df: pd.DataFrame, rule: dict):
     return(
@@ -33,13 +39,26 @@ def split_triples(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     }
 
 def splitting_by_rule():
+    args = arg_parser()
+    dp = args.dataset_prefix
+    base_dir = RES_DIR / f"{dp}_final_process"
+
+    if args.mod:
+        input_dir = base_dir / "06_RESCORING"
+        output_dir = base_dir / "06_RESCORING" / "03_Splitting"
+        csv_glob = f"{dp}rp_*.csv"
+    else:
+        input_dir = base_dir
+        output_dir = base_dir / "03_Splitting"
+        csv_glob = f"{dp}p_*.csv"
+
     pred_dirs = [
-        p for p in sorted(INPUT_DIR.glob("*"))
+        p for p in sorted(input_dir.glob("*"))
         if p.is_dir() and not fnmatch(p.name, "0*")
     ]
-    keep_dir = OUTPUT_DIR / "KEEP"
-    inbet_dir = OUTPUT_DIR / "INBETWEEN"
-    stats_dir = OUTPUT_DIR / "stats"
+    keep_dir = output_dir / "KEEP"
+    inbet_dir = output_dir / "INBETWEEN"
+    stats_dir = output_dir / "stats"
     stats_dir_predicate = stats_dir / "per_predicate"
     keep_dir.mkdir(parents=True, exist_ok=True)
     inbet_dir.mkdir(parents=True, exist_ok=True)
@@ -54,15 +73,15 @@ def splitting_by_rule():
         keep_pred_dir.mkdir(parents=True, exist_ok=True)
         inbet_pred_dir.mkdir(parents=True, exist_ok=True)
 
-        stats_pred = []       
-        chunks = pred_dir.glob("*.csv")
+        stats_pred = []
+        chunks = pred_dir.glob(csv_glob)
         for chunk in chunks:
-            chunk_name = chunk.stem.replace("*p_", "")
+            chunk_name = chunk.stem.split("_", 1)[1]
             df_chunk = pd.read_csv(chunk)
             splits = split_triples(df_chunk)
-            splits["keep"].to_csv(keep_pred_dir / f"k_{chunk_name}.csv")
-            splits["in_between"].to_csv(inbet_pred_dir / f"ib_{chunk_name}.csv")
-            tot, tot_keep, tot_inbet = len(df_chunk), len(splits["keep"]), len(splits["in_between"]) 
+            splits["keep"].to_csv(keep_pred_dir / f"k_{chunk_name}.csv", index=False)
+            splits["in_between"].to_csv(inbet_pred_dir / f"ib_{chunk_name}.csv", index=False)
+            tot, tot_keep, tot_inbet = len(df_chunk), len(splits["keep"]), len(splits["in_between"])
             tot_rej = tot - tot_keep - tot_inbet
             stats_pred.append({
                 "file": chunk.stem,
@@ -70,26 +89,27 @@ def splitting_by_rule():
                 "keep": tot_keep,
                 "in_between": tot_inbet,
                 "reject": tot_rej,
-                "keep%": f"{tot_keep/tot*100:.1f}",
-                "in_between%": f"{tot_inbet/tot*100:.1f}",
-                "reject%": f"{tot_rej/tot*100:.1f}",
+                "keep%": f"{tot_keep/tot*100:.1f}" if tot else "0.0",
+                "in_between%": f"{tot_inbet/tot*100:.1f}" if tot else "0.0",
+                "reject%": f"{tot_rej/tot*100:.1f}" if tot else "0.0",
             })
+        if not stats_pred:
+            continue
         df_stats_pred = pd.DataFrame(stats_pred)
         df_stats_pred.to_csv(stats_dir_predicate / f"s_{pred}.csv", index=False)
         pred_total = df_stats_pred["total"].sum()
         pred_keep = df_stats_pred["keep"].sum()
         pred_inbet = df_stats_pred["in_between"].sum()
         pred_rej = pred_total - pred_keep - pred_inbet
-
         stats_tot.append({
             "predicate": pred,
             "total": pred_total,
             "keep": pred_keep,
             "in_between": pred_inbet,
             "reject": pred_rej,
-            "keep%": f"{pred_keep/pred_total*100:.1f}",
-            "in_between%": f"{pred_inbet/pred_total*100:.1f}",
-            "reject%": f"{pred_rej/pred_total*100:.1f}",
+            "keep%": f"{pred_keep/pred_total*100:.1f}" if pred_total else "0.0",
+            "in_between%": f"{pred_inbet/pred_total*100:.1f}" if pred_total else "0.0",
+            "reject%": f"{pred_rej/pred_total*100:.1f}" if pred_total else "0.0",
         })
 
     df_stats_tot = pd.DataFrame(stats_tot)

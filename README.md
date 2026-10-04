@@ -11,7 +11,9 @@ The two dataset used in this project are the followings that we constructed in t
     - ascent_gent_lm_based_inv_top10.tsv
 
 Both files contains two columns: 
+
     - "triple": (subject, predicate, object)
+    
     - "frequency"
 
 For more detail on the frequency columns, please refer to the article.

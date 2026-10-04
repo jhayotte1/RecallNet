@@ -61,13 +61,6 @@ Same as before, this script can be used to print a few sample of ConceptNet trip
 
 ## Core Steps of the Cleaning Process
 
-Initally, the pipeline was implemented using LangChain and Ollama, you can find those scripts in the folders:
-
-- [langchain_pipeline/](scripts/langchain_pipeline/)
-- [ollama_pipeline/](scripts/ollama_pipeline/)
-
-and the other main scripts are the one that start with 'LG' in the [scripts/](scripts/) folder.
-
 For computation efficiency and computation device availability, the entire pipeline have been implemented using vLLM.
 The paragraphs below describe this pipeline.
 

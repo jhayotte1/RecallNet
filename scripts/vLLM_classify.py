@@ -43,7 +43,7 @@ def parse_args():
     parser.add_argument("--data-dir", type=str, required=True, help="Data directory name (e.g. quasimodo_chunked)")
     parser.add_argument("--dataset-prefix", type=str, default="q", help="Prefix for output files (q=quasimodo, a=ascent)")
     parser.add_argument("--predicates", nargs="+", default=PREDICATE_LIST, help="Predicates to process")
-    parser.add_argument("--fp-num", type=int, default=0, help="Dir number for ffinal_process")
+    parser.add_argument("--fp-num", type=int, default=0, help="Dir number for final_process")
     return parser.parse_args()
 
 def safe_mkdir(path: Path):

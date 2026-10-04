@@ -1,3 +1,4 @@
+conda activate recallnet
 data/
 results/
 __pycache__/
@@ -6,3 +7,4 @@ __pycache__/
 .DS_Store
 .venv/
 DOC_ARCADIA.txt
+script_old/

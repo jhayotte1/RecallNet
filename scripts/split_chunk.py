@@ -4,9 +4,8 @@ from pathlib import Path
 from loading_dataset import load_quasimodo, load_ascent
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-OUT_DIR = DATA_DIR / "quasi_overlap_cn"
 
-TOP_N_ALREADY_DONE = 5_000_000
+TOP_N_ALREADY_DONE = 0
 CHUNK_SIZE = 400_000
 TRIPLE_COLS = ["subject", "predicate", "object"]
 
@@ -31,6 +30,7 @@ def normalize(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def chunk_quasimodo():
+    out_dir = DATA_DIR / "quasimodo"
     df = load_quasimodo()
     print(f"Total: {len(df)} rows")
 
@@ -45,7 +45,7 @@ def chunk_quasimodo():
             continue
 
         pred_parsed = parse_predicate(pred)
-        pred_dir = OUT_DIR / pred_parsed
+        pred_dir = out_dir / pred_parsed
         pred_dir.mkdir(parents=True, exist_ok=True)
 
         n_chunks = (len(group) + CHUNK_SIZE - 1) // CHUNK_SIZE
@@ -68,6 +68,7 @@ def chunk_quasimodo():
 
 
 def chunk_ascent():
+    out_dir = DATA_DIR / "ascent"
     df_quasi = normalize(load_quasimodo())
     print(f"Quasimodo: {len(df_quasi)} rows")
 
@@ -117,6 +118,7 @@ def chunk_ascent():
     print("\nDone")
 
 def chunk_overlap_quasi_cn():
+    out_dir = DATA_DIR / "quasi_overlap_cn"
     print("Loading data")
     df_ov = pd.read_csv(DATA_DIR / "quasi_overlap_cn.csv")
     skipped = {}

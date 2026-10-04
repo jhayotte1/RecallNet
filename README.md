@@ -196,3 +196,47 @@ The main scripts and files that orchtestrate this step are:
     - ['vLLM_filtering_mod.py'](scripts/vLLM_filtering_mod.py)
     - ['vLLM_pipeline/filtering.py'](scripts/vLLM_pipeline/filtering.py)
     - ['vLLM_pipeline/prompt_filtering.txt'](scripts/vLLM_pipeline/prompt_filtering.txt)
+
+
+## Building the final dataset
+Once everystep are done, you can build the RecallNet dataset using the following script:
+['build_recallnet.py'](scripts/build_recallnet.py)
+
+Before running this script, you can organize your results data as follows:
+
+-----
+src/results/Final_results/
+|--> Quasimodo/
+    |--> 1_Classifying/                 # Output of Step 1
+            |-->atlocation/
+            |-->capableof/
+            ...
+    |--> 2_Splitting/                   # Output of Step 2
+            |-->INBETWEEN/
+            |-->KEEP/
+            ...
+    |--> 3_Filtering/                   # Output of Step 3
+            |-->KEEP/
+            |-->MODIFY/
+            |-->REJECT/
+            ...
+    |--> 4_Modifying/                   # Output of Step 4
+            |-->KEEP/
+            |-->MODIFIED/
+            |-->REJECT/
+            ...
+    |--> 5_Scoring_modified/            # Output of Step 5
+            |-->atlocation/
+            ...
+    |--> 6_Splitting_Rescored/          # Output of Step 6
+            |-->INBETWEEN/
+            |-->KEEP/
+            ...
+    |--> 7_Filtering_rescored/          # Output of Step 7
+            |-->KEEP/
+            |-->MODIFY/
+            |-->REJECT/
+            ...
+|--> Ascent/
+    ...
+-----
